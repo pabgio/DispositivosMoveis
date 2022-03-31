@@ -45,7 +45,6 @@ detalhes( Produto produto){
         itemBuilder: (context, int index){
         return ListTile(
           leading: ClipRRect(
-          borderRadius: BorderRadius.circular(50),
           child: Hero(
             tag: 'produto_${produtolist[index].id}',
             child: Image.asset('assets/Produtos/${produtolist[index].id}.jpg'))),

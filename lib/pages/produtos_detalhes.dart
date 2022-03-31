@@ -12,7 +12,7 @@ class ProdutoDetalhePage extends StatelessWidget {
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 181, 230, 236),
         appBar: AppBar(
-        title: Text('Bolo ${produto.nome}'),
+        title: Text('Bolo ${produto.nome}'), 
         backgroundColor: Colors.transparent,
         foregroundColor: Colors.black,
         elevation: 0,
@@ -22,7 +22,10 @@ class ProdutoDetalhePage extends StatelessWidget {
          child: Padding(
           padding: const EdgeInsets.all(24.0),
           child: Column(
+            mainAxisAlignment:  MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
             children: [
+              
               Hero(
             tag: 'produto_${produto.id}',
             child: Image.asset('assets/Produtos/${produto.id}.jpg')
@@ -30,13 +33,12 @@ class ProdutoDetalhePage extends StatelessWidget {
            
               Card(
                 child: Column (
-                  mainAxisAlignment:  MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
+                  
                   children: [
                     ListTile(
                       leading: const Icon(Icons.add_business),
                       title: Text(produto.descricao),
-                      subtitle: Text( '${produto.valor} Reais'),
+                      subtitle: Text( '${produto.valor}'r'R$'),
                       
                     ),
                     

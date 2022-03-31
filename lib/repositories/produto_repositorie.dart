@@ -19,7 +19,7 @@ class ProdutoRepository {
       ),
       Produto(
         id: 3,
-        nome: 'Maracuká',
+        nome: 'Maracujá',
         descricao: 'Bolo de Maracujá',
         valor: 5,
       ),

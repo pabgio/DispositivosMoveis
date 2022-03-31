@@ -13,9 +13,10 @@ class Aplicativo extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+      
       title: 'Manda Cakes',
       theme: ThemeData(
-        primarySwatch: Colors.lightBlue,
+        backgroundColor: Color.fromARGB(255, 181, 230, 236),
       ),
       home: LoginPage(),
     );

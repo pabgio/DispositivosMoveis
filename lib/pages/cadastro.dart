@@ -1,26 +1,29 @@
 // ignore_for_file: deprecated_member_use
 
 import 'package:flutter/material.dart';
-import 'package:flutter_aula1/pages/cadastro.dart';
+import 'package:flutter_aula1/pages/login.dart';
 import 'package:flutter_aula1/pages/produtos_page.dart';
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({Key? key}) : super(key: key);
+class CadastroPage extends StatefulWidget {
+  const CadastroPage({Key? key}) : super(key: key);
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<CadastroPage> createState() => _CadastroPage();
 }
 
-class _LoginPageState extends State<LoginPage> {
-  final _formKey = GlobalKey<FormState>();
+class _CadastroPage extends State<CadastroPage> {
+  final _formKeyCadastro = GlobalKey<FormState>();
+  final _nome = TextEditingController();
+  final _celular = TextEditingController();
   final _email = TextEditingController();
   final _senha = TextEditingController();
+  final _senhaRepita = TextEditingController();
 
   get body => null;
   verificaForm() {
-    if (_formKey.currentState!.validate()) {
+    if (_formKeyCadastro.currentState!.validate()) {
       Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (context) => ProdutosPage()));
+          MaterialPageRoute(builder: (context) => LoginPage()));
     }
   }
 
@@ -31,23 +34,11 @@ class _LoginPageState extends State<LoginPage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              
               Padding(
                 padding: const EdgeInsets.all(20.0),
-                child: Container(
-                  width: 150,
-                  height: 110,
-                  child: SizedBox(
-                      width: MediaQuery.of(context).size.width,
-                      height: MediaQuery.of(context).size.height,
-                      child: Image.asset(
-                        'assets/Logo/Logo.jpg',
-                        fit: BoxFit.cover,
-                      )),
-                ),
               ),
               Form(
-                key: _formKey,
+                key: _formKeyCadastro,
                 child: Padding(
                   padding: const EdgeInsets.all(5.0),
                   child: Column(children: [
@@ -56,6 +47,45 @@ class _LoginPageState extends State<LoginPage> {
                         padding: const EdgeInsets.all(8.0),
                         child: Column(
                           children: [
+                            TextFormField(
+                                controller: _nome,
+                                keyboardType: TextInputType.name,
+                                decoration: InputDecoration(
+                                  labelText: 'Nome',
+                                  border: OutlineInputBorder(),
+                                ),
+                                validator: (value) {
+                                  if (value!.isEmpty) {
+                                    return 'Informe o Nome';
+                                  }
+
+                                  return null;
+                                }),
+                            SizedBox(
+                              height: 10,
+                            ), //imput NOme
+                            TextFormField(
+                                controller: _celular,
+                                keyboardType: TextInputType.number,
+                                decoration: InputDecoration(
+                                  labelText: 'Celular',
+                                  border: OutlineInputBorder(),
+                                ),
+                                validator: (value) {
+                                  String pattern =
+                                      r')''[0-9]{2})\s([0-9])\s([0-9]{4})\s([0-9]{4}))';
+                                  RegExp regExp = new RegExp(pattern);
+                                  if (value!.isEmpty) {
+                                    return 'Informe o Celular';
+                                  }
+                                  if (!regExp.hasMatch(value)) {
+                                    return "Celular inválido";
+                                  }
+                                  return null;
+                                }), //Imput Celular
+                            SizedBox(
+                              height: 10,
+                            ),
                             TextFormField(
                                 controller: _email,
                                 keyboardType: TextInputType.emailAddress,
@@ -90,7 +120,26 @@ class _LoginPageState extends State<LoginPage> {
                                     return 'Informe a senha';
                                   }
                                   return null;
-                                }),
+                                }), //imput Senha
+                            SizedBox(
+                              height: 10,
+                            ),
+                            TextFormField(
+                                controller: _senhaRepita,
+                                obscureText: true,
+                                decoration: InputDecoration(
+                                  labelText: 'Senha',
+                                  border: OutlineInputBorder(),
+                                ),
+                                validator: (value) {
+                                  if (value!.isEmpty) {
+                                    return 'Repita a senha';
+                                  }
+                                  return null;
+                                }), //imput Senha
+                            SizedBox(
+                              height: 10,
+                            ),
                             RaisedButton(
                               textColor: Colors.white,
                               color: Color.fromARGB(255, 24, 151, 255)
@@ -99,25 +148,10 @@ class _LoginPageState extends State<LoginPage> {
                               child: Container(
                                   width: double.infinity,
                                   child: Text(
-                                    'Login',
+                                    'Cadastrar',
                                     textAlign: TextAlign.center,
                                   )),
                             ),
-                            RaisedButton(
-                              textColor: Colors.white,
-                              color: Color.fromARGB(255, 24, 151, 255)
-                                  .withOpacity(0.6),
-                              onPressed: (){
-                                Navigator.of(context).pushReplacement(
-                          MaterialPageRoute(builder: (context) => CadastroPage()));
-                              },
-                              child: Container(
-                                  width: double.infinity,
-                                  child: Text(
-                                    'Cadastre-se',
-                                    textAlign: TextAlign.center,
-                                  )),
-                            )
                           ],
                         ),
                       ),
@@ -140,7 +174,7 @@ class _LoginPageState extends State<LoginPage> {
     return Scaffold(
         resizeToAvoidBottomInset: false,
         appBar: AppBar(
-          title: Text('Manda Cakes'),
+          title: Text('Cadastro'),
         ),
         body: Stack(children: [
           Container(
