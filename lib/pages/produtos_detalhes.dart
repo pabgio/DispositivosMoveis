@@ -12,9 +12,8 @@ class ProdutoDetalhePage extends StatelessWidget {
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 181, 230, 236),
         appBar: AppBar(
+        centerTitle: true,
         title: Text('Bolo ${produto.nome}'), 
-        backgroundColor: Colors.transparent,
-        foregroundColor: Colors.black,
         elevation: 0,
       ),
       body: 

@@ -1,5 +1,7 @@
 // ignore_for_file: deprecated_member_use
 
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_aula1/pages/login.dart';
 import 'package:flutter_aula1/pages/produtos_page.dart';
@@ -69,12 +71,12 @@ class _CadastroPage extends State<CadastroPage> {
                                 keyboardType: TextInputType.number,
                                 decoration: InputDecoration(
                                   labelText: 'Celular',
+                                  //icon: Icon.,
                                   border: OutlineInputBorder(),
                                 ),
                                 validator: (value) {
-                                  String pattern =
-                                      r')''[0-9]{2})\s([0-9])\s([0-9]{4})\s([0-9]{4}))';
-                                  RegExp regExp = new RegExp(pattern);
+                                  String mask = r'(^(?:[+0]9)?[0-9]{10,12}$)';
+                                  RegExp regExp = RegExp(mask);
                                   if (value!.isEmpty) {
                                     return 'Informe o Celular';
                                   }
@@ -142,14 +144,39 @@ class _CadastroPage extends State<CadastroPage> {
                             ),
                             RaisedButton(
                               textColor: Colors.white,
-                              color: Color.fromARGB(255, 24, 151, 255)
-                                  .withOpacity(0.6),
+                              color: Colors.green.withOpacity(0.6),
                               onPressed: verificaForm,
                               child: Container(
                                   width: double.infinity,
-                                  child: Text(
-                                    'Cadastrar',
-                                    textAlign: TextAlign.center,
+                                  height: 40,
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(12.0),
+                                    child: Text(
+                                      'Cadastrar',
+                                      textAlign: TextAlign.center,
+                                    ),
+                                  )),
+                            ),
+                            SizedBox(
+                              height: 10,
+                            ),
+                            RaisedButton(
+                              textColor: Colors.white,
+                              color: Colors.red.withOpacity(0.6),
+                              onPressed: () {
+                                Navigator.of(context).pushReplacement(
+                                    MaterialPageRoute(
+                                        builder: (context) => LoginPage()));
+                              },
+                              child: Container(
+                                  width: double.infinity,
+                                  height: 40,
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(12.0),
+                                    child: Text(
+                                      'Cancelar',
+                                      textAlign: TextAlign.center,
+                                    ),
                                   )),
                             ),
                           ],
@@ -174,6 +201,7 @@ class _CadastroPage extends State<CadastroPage> {
     return Scaffold(
         resizeToAvoidBottomInset: false,
         appBar: AppBar(
+          centerTitle: true,
           title: Text('Cadastro'),
         ),
         body: Stack(children: [

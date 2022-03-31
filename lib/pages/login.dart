@@ -90,7 +90,8 @@ class _LoginPageState extends State<LoginPage> {
                                     return 'Informe a senha';
                                   }
                                   return null;
-                                }),
+                                }//imput
+                                ),
                             RaisedButton(
                               textColor: Colors.white,
                               color: Color.fromARGB(255, 24, 151, 255)
@@ -140,6 +141,7 @@ class _LoginPageState extends State<LoginPage> {
     return Scaffold(
         resizeToAvoidBottomInset: false,
         appBar: AppBar(
+          centerTitle: true,
           title: Text('Manda Cakes'),
         ),
         body: Stack(children: [
