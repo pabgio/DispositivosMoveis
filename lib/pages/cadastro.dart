@@ -238,6 +238,8 @@ class _CadastroPage extends State<CadastroPage> {
             color:Color.fromARGB(255, 175, 180, 180).withOpacity(0.5),
           ),
           _body(),
-        ]));
+        ]
+        )
+        );
   }
 }

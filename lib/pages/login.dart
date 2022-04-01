@@ -172,7 +172,7 @@ class _LoginPageState extends State<LoginPage> {
         resizeToAvoidBottomInset: false,
         body: Stack(children: [
           Container(
-            color: Colors.white.withOpacity(0.2),
+            color: Colors.white,
           ),
           _body(),
         ]));

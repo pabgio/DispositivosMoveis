@@ -3,6 +3,7 @@ import 'package:flutter_aula1/pages/produtos_detalhes.dart';
 import 'package:flutter_aula1/repositories/produto_repositorie.dart';
 
 import '../models/produtos.dart';
+import 'login.dart';
 
 class ProdutosPage extends StatefulWidget {
   const ProdutosPage({Key? key}) : super(key: key);
@@ -32,9 +33,23 @@ class _ProdutosPageState extends State<ProdutosPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-       // centerTitle: true,
+       centerTitle: true,
         title: const Text('Manda Cakes'),
         leading:  Image.asset('assets/Logo/cake.png'),
+        actions: [
+           Padding(
+             padding: const  EdgeInsets.only( top: 20, left: 0, right: 0, bottom: 10),
+             child: Text('Sair'),
+           ),
+          IconButton(
+            onPressed: (){
+              Navigator.of(context).pushReplacement(
+                                    MaterialPageRoute(
+                                        builder: (context) => LoginPage()));
+            }, 
+            icon: Icon(Icons.exit_to_app_sharp),
+          ),
+        ],
       ),
       body: Padding(
         padding: const EdgeInsets.all(10),
