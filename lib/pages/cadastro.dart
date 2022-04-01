@@ -140,8 +140,8 @@ class _CadastroPage extends State<CadastroPage> {
                                   if (value!.isEmpty) {
                                     return 'Informe a senha';
                                   }
-                                  if(value != _senhaRepita){
-                                    return 'As senhas devem ser iguais';
+                                  if(value == _senhaRepita){
+                                    return null;
                                   }
                                   return null;
                                 }), //imput Senha
@@ -164,10 +164,15 @@ class _CadastroPage extends State<CadastroPage> {
                                   if (value!.isEmpty) {
                                     return 'Repita a senha';
                                   }
-                                  if(value != _senha){
-                                    return 'As senhas devem ser iguais';
+                                  
+                                  // ignore: unrelated_type_equality_checks
+                                  if(_senha.value != _senhaRepita.value) {
+                                     return 'As senhas devem ser iguais';
                                   }
-                                  return null;
+                                  if(_senhaRepita.value == _senha){
+                                   return null; 
+                                  }
+                                  
                                 }), //imput Senha
                             SizedBox(
                               height: 10,
@@ -239,7 +244,6 @@ class _CadastroPage extends State<CadastroPage> {
           ),
           _body(),
         ]
-        )
-        );
+        ));
   }
 }
