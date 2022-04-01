@@ -5,7 +5,7 @@ import 'package:flutter_aula1/repositories/produto_repositorie.dart';
 import '../models/produtos.dart';
 
 class ProdutosPage extends StatefulWidget {
- const ProdutosPage({Key? key}) : super(key: key);
+  const ProdutosPage({Key? key}) : super(key: key);
 
   @override
   State<ProdutosPage> createState() => _ProdutosPageState();
@@ -13,51 +13,48 @@ class ProdutosPage extends StatefulWidget {
 
 class _ProdutosPageState extends State<ProdutosPage> {
   late ProdutoRepository produtosRepository;
-   List<Produto> produtolist = [];
+  List<Produto> produtolist = [];
 
-   @override
+  @override
   void initState() {
     super.initState();
-    produtosRepository= ProdutoRepository();
-    produtolist= produtosRepository.produtos;
-
-
+    produtosRepository = ProdutoRepository();
+    produtolist = produtosRepository.produtos;
   }
 
-detalhes( Produto produto){
-  Navigator.of(context).push(
-    MaterialPageRoute(builder: (_) => ProdutoDetalhePage(produto: produto)),
-  );
-}
-
+  detalhes(Produto produto) {
+    Navigator.of(context).push(
+      MaterialPageRoute(builder: (_) => ProdutoDetalhePage(produto: produto)),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar( 
-        title: const Text('Manda Cakes'
-        ),
-        
+      appBar: AppBar(
+       // centerTitle: true,
+        title: const Text('Manda Cakes'),
+        leading:  Image.asset('assets/Logo/cake.png'),
       ),
-    body:Padding(
-      padding:const EdgeInsets.all(10),
-      child: ListView.separated(
-        itemBuilder: (context, int index){
-        return ListTile(
-          leading: ClipRRect(
-          child: Hero(
-            tag: 'produto_${produtolist[index].id}',
-            child: Image.asset('assets/Produtos/${produtolist[index].id}.jpg'))),
-          title:  Text(produtolist[index].descricao),
-          subtitle: Text('${produtolist[index].valor} Reais'),
-          onTap: ()=> detalhes(produtolist[index]),
-    
-        );
-      },
-       separatorBuilder: (_,__)=> const Divider(),
-        itemCount: produtolist.length),
-    ) ,
-
+      body: Padding(
+        padding: const EdgeInsets.all(10),
+        child: ListView.separated(
+            itemBuilder: (context, int index) {
+              return ListTile(
+                leading: ClipRRect(
+                  borderRadius: BorderRadius.circular(20),
+                    child: Hero(
+                        tag: 'produto_${produtolist[index].id}',
+                        child: Image.asset(
+                            'assets/Produtos/${produtolist[index].id}.jpg'))),
+                title: Text(produtolist[index].descricao),
+                subtitle: Text('${produtolist[index].valor} Reais'),
+                onTap: () => detalhes(produtolist[index]),
+              );
+            },
+            separatorBuilder: (_, __) => const Divider(thickness: 10),
+            itemCount: produtolist.length),
+      ),
     );
   }
 }

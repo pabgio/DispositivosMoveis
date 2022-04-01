@@ -31,12 +31,14 @@ class _LoginPageState extends State<LoginPage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              
+              SizedBox(
+                height: 60,
+              ),
               Padding(
                 padding: const EdgeInsets.all(20.0),
                 child: Container(
-                  width: 150,
-                  height: 110,
+                  width: 200,
+                  height: 170,
                   child: SizedBox(
                       width: MediaQuery.of(context).size.width,
                       height: MediaQuery.of(context).size.height,
@@ -60,8 +62,15 @@ class _LoginPageState extends State<LoginPage> {
                                 controller: _email,
                                 keyboardType: TextInputType.emailAddress,
                                 decoration: InputDecoration(
+                                  contentPadding: EdgeInsets.only(top: 20),
                                   labelText: 'E-mail',
                                   border: OutlineInputBorder(),
+                                  isDense: true,
+                                  prefixIcon: Padding(
+                                    padding: EdgeInsets.all(
+                                        10), // add padding to adjust icon
+                                    child: Icon(Icons.mail),
+                                  ),
                                 ),
                                 validator: (value) {
                                   String pattern =
@@ -82,42 +91,63 @@ class _LoginPageState extends State<LoginPage> {
                                 controller: _senha,
                                 obscureText: true,
                                 decoration: InputDecoration(
+                                  contentPadding: EdgeInsets.only(
+                                      top: 20), 
+                                  isDense: true,
                                   labelText: 'Senha',
                                   border: OutlineInputBorder(),
+                                  prefixIcon: Padding(
+                                    padding: EdgeInsets.all(
+                                        10), 
+                                    child: Icon(Icons.password),
+                                  ),
                                 ),
                                 validator: (value) {
                                   if (value!.isEmpty) {
                                     return 'Informe a senha';
                                   }
                                   return null;
-                                }//imput
+                                } //imput
                                 ),
-                            RaisedButton(
-                              textColor: Colors.white,
-                              color: Color.fromARGB(255, 24, 151, 255)
-                                  .withOpacity(0.6),
-                              onPressed: verificaForm,
-                              child: Container(
-                                  width: double.infinity,
-                                  child: Text(
-                                    'Login',
-                                    textAlign: TextAlign.center,
-                                  )),
+                            SizedBox(
+                              height: 10,
                             ),
-                            RaisedButton(
-                              textColor: Colors.white,
-                              color: Color.fromARGB(255, 24, 151, 255)
-                                  .withOpacity(0.6),
-                              onPressed: (){
-                                Navigator.of(context).pushReplacement(
-                          MaterialPageRoute(builder: (context) => CadastroPage()));
-                              },
-                              child: Container(
-                                  width: double.infinity,
-                                  child: Text(
-                                    'Cadastre-se',
-                                    textAlign: TextAlign.center,
-                                  )),
+                            Container(
+                              height: 50,
+                              child: RaisedButton(
+                                textColor: Colors.white,
+                                color: Colors.green.withOpacity(0.6),
+                                onPressed: verificaForm,
+                                child: Container(
+                                    width: double.infinity,
+                                    child: Text(
+                                      'Login',
+                                      textAlign: TextAlign.center,
+                                    )),
+                              ),
+                            ),
+                            SizedBox(
+                              height: 10,
+                            ),
+                            Container(
+                              height: 50,
+                              child: RaisedButton(
+                                textColor: Colors.white,
+                                color: Color.fromARGB(255, 24, 151, 255)
+                                    .withOpacity(0.6),
+                                onPressed: () {
+                                  Navigator.of(context).pushReplacement(
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              CadastroPage()));
+                                },
+                                child: Container(
+                                    width: double.infinity,
+                                    child: Text(
+                                      'Cadastre-se',
+                                      textAlign: TextAlign.center,
+                                    )),
+                              ),
                             )
                           ],
                         ),
@@ -140,13 +170,9 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         resizeToAvoidBottomInset: false,
-        appBar: AppBar(
-          centerTitle: true,
-          title: Text('Manda Cakes'),
-        ),
         body: Stack(children: [
           Container(
-            color: Colors.white,
+            color: Colors.white.withOpacity(0.2),
           ),
           _body(),
         ]));

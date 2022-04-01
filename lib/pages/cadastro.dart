@@ -30,8 +30,7 @@ class _CadastroPage extends State<CadastroPage> {
   }
 
   Widget _body() {
-    return Column(
-      children: [
+    return 
         SingleChildScrollView(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -55,6 +54,11 @@ class _CadastroPage extends State<CadastroPage> {
                                 decoration: InputDecoration(
                                   labelText: 'Nome',
                                   border: OutlineInputBorder(),
+                                  prefixIcon: Padding(
+                                    padding: EdgeInsets.all(
+                                        10), 
+                                    child: Icon(Icons.people),
+                                  ),
                                 ),
                                 validator: (value) {
                                   if (value!.isEmpty) {
@@ -73,6 +77,11 @@ class _CadastroPage extends State<CadastroPage> {
                                   labelText: 'Celular',
                                   //icon: Icon.,
                                   border: OutlineInputBorder(),
+                                  prefixIcon: Padding(
+                                    padding: EdgeInsets.all(
+                                        10), 
+                                    child: Icon(Icons.phone_android),
+                                  ),
                                 ),
                                 validator: (value) {
                                   String mask = r'(^(?:[+0]9)?[0-9]{10,12}$)';
@@ -94,6 +103,11 @@ class _CadastroPage extends State<CadastroPage> {
                                 decoration: InputDecoration(
                                   labelText: 'E-mail',
                                   border: OutlineInputBorder(),
+                                  prefixIcon: Padding(
+                                    padding: EdgeInsets.all(
+                                        10), 
+                                    child: Icon(Icons.mail),
+                                  ),
                                 ),
                                 validator: (value) {
                                   String pattern =
@@ -116,10 +130,18 @@ class _CadastroPage extends State<CadastroPage> {
                                 decoration: InputDecoration(
                                   labelText: 'Senha',
                                   border: OutlineInputBorder(),
+                                  prefixIcon: Padding(
+                                    padding: EdgeInsets.all(
+                                        10), 
+                                    child: Icon(Icons.password),
+                                  ),
                                 ),
                                 validator: (value) {
                                   if (value!.isEmpty) {
                                     return 'Informe a senha';
+                                  }
+                                  if(value != _senhaRepita){
+                                    return 'As senhas devem ser iguais';
                                   }
                                   return null;
                                 }), //imput Senha
@@ -132,10 +154,18 @@ class _CadastroPage extends State<CadastroPage> {
                                 decoration: InputDecoration(
                                   labelText: 'Senha',
                                   border: OutlineInputBorder(),
+                                  prefixIcon: Padding(
+                                    padding: EdgeInsets.all(
+                                        10), 
+                                    child: Icon(Icons.password),
+                                  ),
                                 ),
                                 validator: (value) {
                                   if (value!.isEmpty) {
                                     return 'Repita a senha';
+                                  }
+                                  if(value != _senha){
+                                    return 'As senhas devem ser iguais';
                                   }
                                   return null;
                                 }), //imput Senha
@@ -191,8 +221,7 @@ class _CadastroPage extends State<CadastroPage> {
               ),
             ],
           ),
-        )
-      ],
+        
     );
   }
 
@@ -202,11 +231,11 @@ class _CadastroPage extends State<CadastroPage> {
         resizeToAvoidBottomInset: false,
         appBar: AppBar(
           centerTitle: true,
-          title: Text('Cadastro'),
+          title: Text('CADASTRO'),
         ),
         body: Stack(children: [
           Container(
-            color: Colors.white,
+            color:Color.fromARGB(255, 175, 180, 180).withOpacity(0.5),
           ),
           _body(),
         ]));
