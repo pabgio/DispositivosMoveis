@@ -6,7 +6,7 @@
 
     O projeto é um aplicativo de venda de bolos o qual o cliente pode efetuar a compra se identificando através 
     de cadastro e posteriormente através de login. 
-	  Das funcionalidades implementadas nesta fase do projeto apenas o Carrinho de Compras não foi concluído.
+    Das funcionalidades implementadas nesta fase do projeto apenas o Carrinho de Compras não foi concluído.
 
     Atividades Desenvolvidas
     Gabriel: Repositório de produtos, documentação e envio do projeto
