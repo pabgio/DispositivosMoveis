@@ -9,17 +9,17 @@ class ProdutoDetalhePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 175, 180, 180).withOpacity(0.5),
+      backgroundColor: Colors.white,
       appBar: AppBar(
         centerTitle: true,
-        title: Text('Bolo ${produto.nome}'),
+        title: Text('Bolo de ${produto.nome}'),
         elevation: 0,
       ),
       body: SingleChildScrollView(
         child: Column(
           children: [
             SizedBox(
-              height: 50,
+              height: 40,
             ),
             Padding(
               padding: const EdgeInsets.all(24.0),
@@ -31,12 +31,9 @@ class ProdutoDetalhePage extends StatelessWidget {
                     decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(50),
-                      boxShadow: [
-                        BoxShadow(color: Colors.black12, blurRadius: 5)
-                      ],
+                      
                     ),
                     child: ClipRRect(
-                      borderRadius: BorderRadius.circular(20),
                       child: Hero(
                           tag: 'produto_${produto.id}',
                           child:
@@ -44,14 +41,15 @@ class ProdutoDetalhePage extends StatelessWidget {
                     ),
                   ),
                   SizedBox(
-                    height: 10,
+                    height: 20,
                   ),
                   Card(
+                    elevation: 10,
                     child: Column(children: [
                       ListTile(
-                        leading: const Icon(Icons.add_business),
+                        leading: const Icon(Icons.cake_rounded),
                         title: Text(produto.descricao),
-                        subtitle: Text('${produto.valor}' r'R$'),
+                        subtitle: Text(r'R$' '${produto.valor}' ),
                       ),
                       const Divider(
                         thickness: 1,

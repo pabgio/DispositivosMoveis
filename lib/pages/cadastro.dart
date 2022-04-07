@@ -140,10 +140,10 @@ class _CadastroPage extends State<CadastroPage> {
                                   if (value!.isEmpty) {
                                     return 'Informe a senha';
                                   }
-                                  if(value == _senhaRepita){
+                                  if(_senha.value == _senhaRepita.value){
                                     return null;
                                   }
-                                  return null;
+                                   else  return 'As senhas devem ser iguais';
                                 }), //imput Senha
                             SizedBox(
                               height: 10,
@@ -240,7 +240,7 @@ class _CadastroPage extends State<CadastroPage> {
         ),
         body: Stack(children: [
           Container(
-            color:Color.fromARGB(255, 175, 180, 180).withOpacity(0.5),
+            color:Color.fromARGB(255, 175, 180, 180).withOpacity(0.1),
           ),
           _body(),
         ]

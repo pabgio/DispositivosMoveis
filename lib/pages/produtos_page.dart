@@ -41,13 +41,19 @@ class _ProdutosPageState extends State<ProdutosPage> {
              padding: const  EdgeInsets.only( top: 20, left: 0, right: 0, bottom: 10),
              child: Text('Sair'),
            ),
-          IconButton(
-            onPressed: (){
-              Navigator.of(context).pushReplacement(
-                                    MaterialPageRoute(
-                                        builder: (context) => LoginPage()));
-            }, 
-            icon: Icon(Icons.exit_to_app_sharp),
+          Padding(
+            padding: const  EdgeInsets.only( top: 5, left: 0, right: 0, bottom: 0),
+            child: IconButton(
+              onPressed: (){
+                Navigator.of(context).pushReplacement(
+                                      MaterialPageRoute(
+                                          builder: (context) => LoginPage()
+                                          )
+                                          );
+              }, 
+              icon: Icon(Icons.exit_to_app_sharp),
+              
+            ),
           ),
         ],
       ),
@@ -61,7 +67,9 @@ class _ProdutosPageState extends State<ProdutosPage> {
                     child: Hero(
                         tag: 'produto_${produtolist[index].id}',
                         child: Image.asset(
-                            'assets/Produtos/${produtolist[index].id}.jpg'))),
+                            'assets/Produtos/${produtolist[index].id}.jpg'),
+                            ),
+                            ),
                 title: Text(produtolist[index].descricao),
                 subtitle: Text('${produtolist[index].valor} Reais'),
                 onTap: () => detalhes(produtolist[index]),

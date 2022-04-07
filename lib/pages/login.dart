@@ -113,7 +113,7 @@ class _LoginPageState extends State<LoginPage> {
                               height: 10,
                             ),
                             Container(
-                              height: 50,
+                              height: 40,
                               child: RaisedButton(
                                 textColor: Colors.white,
                                 color: Colors.green.withOpacity(0.6),
@@ -130,7 +130,7 @@ class _LoginPageState extends State<LoginPage> {
                               height: 10,
                             ),
                             Container(
-                              height: 50,
+                              height: 40,
                               child: RaisedButton(
                                 textColor: Colors.white,
                                 color: Color.fromARGB(255, 24, 151, 255)
