@@ -1,8 +1,13 @@
 // ignore_for_file: deprecated_member_use
 
 import 'package:flutter/material.dart';
-import 'package:flutter_aula1/pages/cadastro.dart';
-import 'package:flutter_aula1/pages/produtos_page.dart';
+import 'package:mandaCakes/pages/cadastro.dart';
+import 'package:provider/provider.dart';
+
+import 'package:mandaCakes/pages/produtos_page.dart';
+import 'package:mandaCakes/pages/produtos_page.dart';
+import 'package:mandaCakes/services/autenticacao.dart';
+
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -13,14 +18,23 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   final _formKey = GlobalKey<FormState>();
-  final _email = TextEditingController();
-  final _senha = TextEditingController();
+  final email = TextEditingController();
+  final senha = TextEditingController();
 
   get body => null;
+
+    login() async {
+    try {
+      await context.read<Autenticacao>().login(email.text, senha.text);
+    } on AuthException catch (e) {
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text(e.message)));
+    }
+  }
+
   verificaForm() {
     if (_formKey.currentState!.validate()) {
-      Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (context) => ProdutosPage()));
+      login();
     }
   }
 
@@ -59,7 +73,7 @@ class _LoginPageState extends State<LoginPage> {
                         child: Column(
                           children: [
                             TextFormField(
-                                controller: _email,
+                                controller: email,
                                 keyboardType: TextInputType.emailAddress,
                                 decoration: InputDecoration(
                                   contentPadding: EdgeInsets.only(top: 20),
@@ -88,7 +102,7 @@ class _LoginPageState extends State<LoginPage> {
                               height: 10,
                             ),
                             TextFormField(
-                                controller: _senha,
+                                controller: senha,
                                 obscureText: true,
                                 decoration: InputDecoration(
                                   contentPadding: EdgeInsets.only(

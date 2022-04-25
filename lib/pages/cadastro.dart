@@ -3,8 +3,8 @@
 import 'dart:ffi';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_aula1/pages/login.dart';
-import 'package:flutter_aula1/pages/produtos_page.dart';
+import 'package:mandaCakes/pages/login.dart';
+import 'package:mandaCakes/pages/produtos_page.dart';
 
 class CadastroPage extends StatefulWidget {
   const CadastroPage({Key? key}) : super(key: key);

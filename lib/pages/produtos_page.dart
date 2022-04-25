@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_aula1/pages/produtos_detalhes.dart';
-import 'package:flutter_aula1/repositories/produto_repositorie.dart';
+import 'package:mandaCakes/pages/produtos_detalhes.dart';
+import 'package:mandaCakes/repositories/produto_repositorie.dart';
 
 import '../models/produtos.dart';
+import '../repositories/produto_repositorie.dart';
 import 'login.dart';
 
 class ProdutosPage extends StatefulWidget {

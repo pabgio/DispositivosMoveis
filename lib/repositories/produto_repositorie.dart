@@ -1,4 +1,4 @@
-import 'package:flutter_aula1/models/produtos.dart';
+import 'package:mandaCakes/models/produtos.dart';
 
 class ProdutoRepository {
   List<Produto> produtos = [];
