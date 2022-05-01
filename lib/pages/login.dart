@@ -3,11 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:mandaCakes/pages/cadastro.dart';
 import 'package:provider/provider.dart';
-
-import 'package:mandaCakes/pages/produtos_page.dart';
-import 'package:mandaCakes/pages/produtos_page.dart';
 import 'package:mandaCakes/services/autenticacao.dart';
-
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -20,15 +16,19 @@ class _LoginPageState extends State<LoginPage> {
   final _formKey = GlobalKey<FormState>();
   final email = TextEditingController();
   final senha = TextEditingController();
+  bool loading = false;
 
   get body => null;
 
-    login() async {
+  login() async {
+    setState(() => loading = true);
     try {
       await context.read<Autenticacao>().login(email.text, senha.text);
     } on AuthException catch (e) {
+      setState(() => loading = false);
       ScaffoldMessenger.of(context)
           .showSnackBar(SnackBar(content: Text(e.message)));
+        
     }
   }
 
@@ -52,7 +52,7 @@ class _LoginPageState extends State<LoginPage> {
                 padding: const EdgeInsets.all(20.0),
                 child: Container(
                   width: 200,
-                  height: 170,
+                  height: 135,
                   child: SizedBox(
                       width: MediaQuery.of(context).size.width,
                       height: MediaQuery.of(context).size.height,
@@ -73,6 +73,10 @@ class _LoginPageState extends State<LoginPage> {
                         child: Column(
                           children: [
                             TextFormField(
+                                scrollPadding: EdgeInsets.only(
+                                    bottom: MediaQuery.of(context)
+                                        .viewInsets
+                                        .bottom),
                                 controller: email,
                                 keyboardType: TextInputType.emailAddress,
                                 decoration: InputDecoration(
@@ -102,17 +106,19 @@ class _LoginPageState extends State<LoginPage> {
                               height: 10,
                             ),
                             TextFormField(
+                                scrollPadding: EdgeInsets.only(
+                                    bottom: MediaQuery.of(context)
+                                        .viewInsets
+                                        .bottom),
                                 controller: senha,
                                 obscureText: true,
                                 decoration: InputDecoration(
-                                  contentPadding: EdgeInsets.only(
-                                      top: 20), 
+                                  contentPadding: EdgeInsets.only(top: 20),
                                   isDense: true,
                                   labelText: 'Senha',
                                   border: OutlineInputBorder(),
                                   prefixIcon: Padding(
-                                    padding: EdgeInsets.all(
-                                        10), 
+                                    padding: EdgeInsets.all(10),
                                     child: Icon(Icons.password),
                                   ),
                                 ),
@@ -140,29 +146,19 @@ class _LoginPageState extends State<LoginPage> {
                                     )),
                               ),
                             ),
-                            SizedBox(
-                              height: 10,
-                            ),
-                            Container(
-                              height: 40,
-                              child: RaisedButton(
-                                textColor: Colors.white,
-                                color: Color.fromARGB(255, 24, 151, 255)
-                                    .withOpacity(0.6),
+                            TextButton(
                                 onPressed: () {
-                                  Navigator.of(context).pushReplacement(
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              CadastroPage()));
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => CadastroPage(),
+                                    ),
+                                  );
                                 },
-                                child: Container(
-                                    width: double.infinity,
-                                    child: Text(
-                                      'Cadastre-se',
-                                      textAlign: TextAlign.center,
-                                    )),
-                              ),
-                            )
+                                child:
+                                 Text('Ainda não tem conta? Cadastre-se agora.' , style: TextStyle(color: Colors.blue),)
+                                
+                                ),
                           ],
                         ),
                       ),

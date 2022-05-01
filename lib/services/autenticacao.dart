@@ -1,6 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:mandaCakes/widgets/auth_check.dart';
 
 class AuthException implements Exception {
   String message;
@@ -29,7 +28,7 @@ class Autenticacao extends ChangeNotifier {
     notifyListeners();
   }
 
-  registrar(String email, String senha) async {
+  cadastrar(String email, String senha) async {
     try {
       await _auth.createUserWithEmailAndPassword(email: email, password: senha);
       _getUser();
@@ -48,7 +47,7 @@ class Autenticacao extends ChangeNotifier {
       _getUser();
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
-        throw AuthException('Email não encontrado. Cadastre-se.');
+        throw AuthException('Usuário não encontrado. Cadastre-se.');
       } else if (e.code == 'wrong-password') {
         throw AuthException('Senha incorreta. Tente novamente');
       }

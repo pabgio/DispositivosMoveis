@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:mandaCakes/pages/produtos_detalhes.dart';
 import 'package:mandaCakes/repositories/produto_repositorie.dart';
-
+import 'package:provider/provider.dart';
 import '../models/produtos.dart';
 import '../repositories/produto_repositorie.dart';
+import '../services/autenticacao.dart';
 import 'login.dart';
 
 class ProdutosPage extends StatefulWidget {
@@ -36,7 +37,6 @@ class _ProdutosPageState extends State<ProdutosPage> {
       appBar: AppBar(
        centerTitle: true,
         title: const Text('Manda Cakes'),
-        leading:  Image.asset('assets/Logo/cake.png'),
         actions: [
            Padding(
              padding: const  EdgeInsets.only( top: 20, left: 0, right: 0, bottom: 10),
@@ -45,18 +45,38 @@ class _ProdutosPageState extends State<ProdutosPage> {
           Padding(
             padding: const  EdgeInsets.only( top: 5, left: 0, right: 0, bottom: 0),
             child: IconButton(
-              onPressed: (){
-                Navigator.of(context).pushReplacement(
-                                      MaterialPageRoute(
-                                          builder: (context) => LoginPage()
-                                          )
-                                          );
-              }, 
+              onPressed: ()=> context.read<Autenticacao>().logout(),
               icon: Icon(Icons.exit_to_app_sharp),
               
             ),
           ),
         ],
+      ),
+      bottomNavigationBar: BottomAppBar (
+        child: Container(
+          height: 50,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              IconButton(
+                onPressed: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(builder: (_) => ProdutosPage()),
+                  );
+                },
+                icon: Icon(Icons.home),
+              ),
+              IconButton(
+                onPressed: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(builder: (_) => LoginPage()),
+                  );
+                },
+                icon: Icon(Icons.person_outline_rounded),
+              ),
+            ],
+          ),
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(10),
