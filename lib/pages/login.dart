@@ -28,7 +28,6 @@ class _LoginPageState extends State<LoginPage> {
       setState(() => loading = false);
       ScaffoldMessenger.of(context)
           .showSnackBar(SnackBar(content: Text(e.message)));
-        
     }
   }
 
@@ -82,7 +81,9 @@ class _LoginPageState extends State<LoginPage> {
                                 decoration: InputDecoration(
                                   contentPadding: EdgeInsets.only(top: 20),
                                   labelText: 'E-mail',
-                                  border: OutlineInputBorder(),
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(20),
+                                  ),
                                   isDense: true,
                                   prefixIcon: Padding(
                                     padding: EdgeInsets.all(
@@ -116,7 +117,9 @@ class _LoginPageState extends State<LoginPage> {
                                   contentPadding: EdgeInsets.only(top: 20),
                                   isDense: true,
                                   labelText: 'Senha',
-                                  border: OutlineInputBorder(),
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(20),
+                                  ),
                                   prefixIcon: Padding(
                                     padding: EdgeInsets.all(10),
                                     child: Icon(Icons.password),
@@ -134,9 +137,7 @@ class _LoginPageState extends State<LoginPage> {
                             ),
                             Container(
                               height: 40,
-                              child: RaisedButton(
-                                textColor: Colors.white,
-                                color: Colors.green.withOpacity(0.6),
+                              child: ElevatedButton(
                                 onPressed: verificaForm,
                                 child: Container(
                                     width: double.infinity,
@@ -144,6 +145,16 @@ class _LoginPageState extends State<LoginPage> {
                                       'Login',
                                       textAlign: TextAlign.center,
                                     )),
+                                style: ButtonStyle(
+                                  backgroundColor:
+                                      MaterialStateProperty.all<Color>(
+                                          Colors.green),
+                                  shape: MaterialStateProperty.all(
+                                    RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(20)),
+                                  ),
+                                ),
                               ),
                             ),
                             TextButton(
@@ -155,10 +166,10 @@ class _LoginPageState extends State<LoginPage> {
                                     ),
                                   );
                                 },
-                                child:
-                                 Text('Ainda não tem conta? Cadastre-se agora.' , style: TextStyle(color: Colors.blue),)
-                                
-                                ),
+                                child: Text(
+                                  'Ainda não tem conta? Cadastre-se agora.',
+                                  style: TextStyle(color: Colors.blue),
+                                )),
                           ],
                         ),
                       ),

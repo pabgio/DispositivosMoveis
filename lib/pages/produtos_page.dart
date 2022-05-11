@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import '../models/produtos.dart';
 import '../repositories/produto_repositorie.dart';
 import '../services/autenticacao.dart';
+import 'carrinho.dart';
 import 'login.dart';
 
 class ProdutosPage extends StatefulWidget {
@@ -65,6 +66,14 @@ class _ProdutosPageState extends State<ProdutosPage> {
                   );
                 },
                 icon: Icon(Icons.home),
+              ),
+              IconButton(
+                onPressed: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(builder: (_) => CarrinhoPage()),
+                  );
+                },
+                icon: Icon(Icons.shopping_cart),
               ),
               IconButton(
                 onPressed: () {

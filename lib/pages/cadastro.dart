@@ -64,7 +64,9 @@ class _CadastroPage extends State<CadastroPage> {
                           keyboardType: TextInputType.name,
                           decoration: InputDecoration(
                             labelText: 'Nome',
-                            border: OutlineInputBorder(),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(20),
+                            ),
                             prefixIcon: Padding(
                               padding: EdgeInsets.all(10),
                               child: Icon(Icons.people),
@@ -86,7 +88,9 @@ class _CadastroPage extends State<CadastroPage> {
                           decoration: InputDecoration(
                             labelText: 'Celular',
                             //icon: Icon.,
-                            border: OutlineInputBorder(),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(20),
+                            ),
                             prefixIcon: Padding(
                               padding: EdgeInsets.all(10),
                               child: Icon(Icons.phone_android),
@@ -111,7 +115,9 @@ class _CadastroPage extends State<CadastroPage> {
                           keyboardType: TextInputType.emailAddress,
                           decoration: InputDecoration(
                             labelText: 'E-mail',
-                            border: OutlineInputBorder(),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(20),
+                            ),
                             prefixIcon: Padding(
                               padding: EdgeInsets.all(10),
                               child: Icon(Icons.mail),
@@ -137,7 +143,9 @@ class _CadastroPage extends State<CadastroPage> {
                           obscureText: true,
                           decoration: InputDecoration(
                             labelText: 'Senha',
-                            border: OutlineInputBorder(),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(20),
+                            ),
                             prefixIcon: Padding(
                               padding: EdgeInsets.all(10),
                               child: Icon(Icons.password),
@@ -149,29 +157,32 @@ class _CadastroPage extends State<CadastroPage> {
                             }
                             if (value.length < 6) {
                               return 'A senha deve ter no mínimo 6 caracteres';
-                            }
-                            else
+                            } else
                               return null;
                           }), //imput Senha
                       SizedBox(
                         height: 10,
                       ),
-                     
-                      RaisedButton(
-                        textColor: Colors.white,
-                        color: Colors.green.withOpacity(0.6),
-                        onPressed: verificaForm,
-                        child: Container(
-                            width: double.infinity,
-                            height: 40,
-                            child: Padding(
-                              padding: const EdgeInsets.all(12.0),
-                              child: Text(
-                                'Cadastrar',
-                                textAlign: TextAlign.center,
+
+                      ElevatedButton(
+                                onPressed: verificaForm,
+                                child: Container(
+                                    width: double.infinity,
+                                    child: Text(
+                                      'Cadastrar',
+                                      textAlign: TextAlign.center,
+                                    )),
+                                style: ButtonStyle(
+                                  backgroundColor:
+                                      MaterialStateProperty.all<Color>(
+                                          Colors.green),
+                                  shape: MaterialStateProperty.all(
+                                    RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(20)),
+                                  ),
+                                ),
                               ),
-                            )),
-                      ),
 
                       TextButton(
                         onPressed: () {

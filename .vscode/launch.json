@@ -5,18 +5,18 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "flutter_aula1",
+            "name": "mandaCakes",
             "request": "launch",
             "type": "dart"
         },
         {
-            "name": "flutter_aula1 (profile mode)",
+            "name": "mandaCakes (profile mode)",
             "request": "launch",
             "type": "dart",
             "flutterMode": "profile"
         },
         {
-            "name": "flutter_aula1 (release mode)",
+            "name": "mandaCakes (release mode)",
             "request": "launch",
             "type": "dart",
             "flutterMode": "release"

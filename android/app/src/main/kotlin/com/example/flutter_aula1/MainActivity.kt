@@ -1,4 +1,4 @@
-package com.example.flutter_aula1
+package com.example.mandaCakes
 
 import io.flutter.embedding.android.FlutterActivity
 

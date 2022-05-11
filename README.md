@@ -1,4 +1,4 @@
-# Projeto P1
+### Projeto P2
     Alunos:
     Gabriel Adriovane Scheidt RA:1753134
     Lucas Vassão Palazzo RA:1590995
@@ -9,11 +9,11 @@
     Das funcionalidades implementadas nesta fase do projeto apenas o Carrinho de Compras não foi concluído.
 
     Atividades Desenvolvidas
-    Gabriel: Repositório de produtos, documentação e envio do projeto
-    Pablo: Interfaces;
+    Gabriel: Repositório de produtos, documentação e envio do projeto.
+    Pablo: Interfaces, auteenticação, cadastro, login.
     Lucas: Testes e verificações.
 
-## Getting Started
+### Getting Started
 
     Para Startar o projeto:
       -> Deve ser feito o download da pasta no Github através do download do link: https://github.com/pabgio/DispositivosMoveis.
@@ -21,5 +21,5 @@
       -> Abrir a pasta através do VSCode.
       -> Executar o Arquivo Main;
 
-      OBS: O usuário deve ter o ambiente Flutter configurado corretamente.
+    OBS: O usuário deve ter o ambiente Flutter configurado corretamente.
 
