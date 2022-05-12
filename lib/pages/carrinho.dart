@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:mandaCakes/models/itens.dart';
 import 'package:mandaCakes/repositories/carrinho_repositorie.dart';
 import 'package:provider/provider.dart';
 
@@ -52,7 +51,7 @@ class _CarrinhoPageState extends State<CarrinhoPage> {
             Padding(
               padding: const EdgeInsets.only(top: 20),
               child: Text(
-                '${carrinho.itens.length} itens',
+                '${carrinho.Produto} Produtos',
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
             ),

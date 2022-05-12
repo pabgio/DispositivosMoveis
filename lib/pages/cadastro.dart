@@ -48,7 +48,11 @@ class _CadastroPage extends State<CadastroPage> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Padding(
-            padding: const EdgeInsets.all(0.0),
+            padding: const EdgeInsets.only(top: 40),
+            child: Text(
+              'Cadastro',
+              style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold, color: Colors.blue),
+            ),
           ),
           Form(
             key: _formKeyCadastro,
@@ -59,54 +63,54 @@ class _CadastroPage extends State<CadastroPage> {
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Column(children: [
-                      TextFormField(
-                          controller: nome,
-                          keyboardType: TextInputType.name,
-                          decoration: InputDecoration(
-                            labelText: 'Nome',
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(20),
-                            ),
-                            prefixIcon: Padding(
-                              padding: EdgeInsets.all(10),
-                              child: Icon(Icons.people),
-                            ),
-                          ),
-                          validator: (value) {
-                            if (value!.isEmpty) {
-                              return 'Informe o Nome';
-                            }
+                      // TextFormField(
+                      //     controller: nome,
+                      //     keyboardType: TextInputType.name,
+                      //     decoration: InputDecoration(
+                      //       labelText: 'Nome',
+                      //       border: OutlineInputBorder(
+                      //         borderRadius: BorderRadius.circular(20),
+                      //       ),
+                      //       prefixIcon: Padding(
+                      //         padding: EdgeInsets.all(10),
+                      //         child: Icon(Icons.people),
+                      //       ),
+                      //     ),
+                      //     validator: (value) {
+                      //       if (value!.isEmpty) {
+                      //         return 'Informe o Nome';
+                      //       }
 
-                            return null;
-                          }),
-                      SizedBox(
-                        height: 10,
-                      ), //imput NOme
-                      TextFormField(
-                          controller: celular,
-                          keyboardType: TextInputType.number,
-                          decoration: InputDecoration(
-                            labelText: 'Celular',
-                            //icon: Icon.,
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(20),
-                            ),
-                            prefixIcon: Padding(
-                              padding: EdgeInsets.all(10),
-                              child: Icon(Icons.phone_android),
-                            ),
-                          ),
-                          validator: (value) {
-                            String mask = r'(^(?:[+0]9)?[0-9]{10,12}$)';
-                            RegExp regExp = RegExp(mask);
-                            if (value!.isEmpty) {
-                              return 'Informe o Celular';
-                            }
-                            if (!regExp.hasMatch(value)) {
-                              return "Celular inválido";
-                            }
-                            return null;
-                          }), //Imput Celular
+                      //       return null;
+                      //     }),
+                      // SizedBox(
+                      //   height: 10,
+                      // ), //imput NOme
+                      // TextFormField(
+                      //     controller: celular,
+                      //     keyboardType: TextInputType.number,
+                      //     decoration: InputDecoration(
+                      //       labelText: 'Celular',
+                      //       //icon: Icon.,
+                      //       border: OutlineInputBorder(
+                      //         borderRadius: BorderRadius.circular(20),
+                      //       ),
+                      //       prefixIcon: Padding(
+                      //         padding: EdgeInsets.all(10),
+                      //         child: Icon(Icons.phone_android),
+                      //       ),
+                      //     ),
+                      //     validator: (value) {
+                      //       String mask = r'(^(?:[+0]9)?[0-9]{10,12}$)';
+                      //       RegExp regExp = RegExp(mask);
+                      //       if (value!.isEmpty) {
+                      //         return 'Informe o Celular';
+                      //       }
+                      //       if (!regExp.hasMatch(value)) {
+                      //         return "Celular inválido";
+                      //       }
+                      //       return null;
+                      //     }), //Imput Celular
                       SizedBox(
                         height: 10,
                       ),
@@ -165,24 +169,22 @@ class _CadastroPage extends State<CadastroPage> {
                       ),
 
                       ElevatedButton(
-                                onPressed: verificaForm,
-                                child: Container(
-                                    width: double.infinity,
-                                    child: Text(
-                                      'Cadastrar',
-                                      textAlign: TextAlign.center,
-                                    )),
-                                style: ButtonStyle(
-                                  backgroundColor:
-                                      MaterialStateProperty.all<Color>(
-                                          Colors.green),
-                                  shape: MaterialStateProperty.all(
-                                    RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(20)),
-                                  ),
-                                ),
-                              ),
+                        onPressed: verificaForm,
+                        child: Container(
+                            width: double.infinity,
+                            child: Text(
+                              'Cadastrar',
+                              textAlign: TextAlign.center,
+                            )),
+                        style: ButtonStyle(
+                          backgroundColor:
+                              MaterialStateProperty.all<Color>(Colors.green),
+                          shape: MaterialStateProperty.all(
+                            RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(20)),
+                          ),
+                        ),
+                      ),
 
                       TextButton(
                         onPressed: () {
@@ -212,15 +214,7 @@ class _CadastroPage extends State<CadastroPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          centerTitle: true,
-          title: Text('CADASTRO'),
-        ),
-        body: Stack(children: [
-          Container(
-            color: Color.fromARGB(255, 175, 180, 180).withOpacity(0.1),
-          ),
-          _body(),
-        ]));
+      body: _body(),
+    );
   }
 }

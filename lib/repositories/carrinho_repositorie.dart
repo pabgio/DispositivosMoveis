@@ -1,31 +1,37 @@
 import 'package:flutter/cupertino.dart';
 import 'package:mandaCakes/models/produtos.dart';
+import 'package:mandaCakes/repositories/carrinho_repositorie.dart';
 import 'package:mandaCakes/repositories/produto_repositorie.dart';
 import 'package:sqflite/sqflite.dart';
 
 import '../database/db.dart';
-import '../models/itens.dart';
 
 class CarrinhoRepository extends ChangeNotifier {
    late Database db;
-   List <Itens> _carrinho = [];
+   List <Produtos> _carrinho = [];
 
-   List<Itens> get carrinho => _carrinho;
+   List<Produtos> get carrinho => _carrinho;
 
     CarrinhoRepository() {
       _initRepository();
     }
 
-  get itens => null;
+  get Produto => null;
 
     _initRepository() async {
-      await  getItens();
+      await getProdutos();
+      
+
 
     }
 
-    getItens() async {
+    getProdutos() async {
      _carrinho = [];
+      
     
       notifyListeners();
     }
+}
+
+class Produtos {
 }

@@ -53,6 +53,8 @@ class DB{
     senha TEXT
   )
   ''';
+
+  static getDatabase() {}
   
 
 }

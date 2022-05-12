@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mandaCakes/pages/perfil_page.dart';
 import 'package:mandaCakes/pages/produtos_detalhes.dart';
 import 'package:mandaCakes/repositories/produto_repositorie.dart';
 import 'package:provider/provider.dart';
@@ -6,7 +7,7 @@ import '../models/produtos.dart';
 import '../repositories/produto_repositorie.dart';
 import '../services/autenticacao.dart';
 import 'carrinho.dart';
-import 'login.dart';
+import 'perfil_page.dart';
 
 class ProdutosPage extends StatefulWidget {
   const ProdutosPage({Key? key}) : super(key: key);
@@ -65,7 +66,7 @@ class _ProdutosPageState extends State<ProdutosPage> {
                     MaterialPageRoute(builder: (_) => ProdutosPage()),
                   );
                 },
-                icon: Icon(Icons.home),
+                icon: Icon(Icons.home_max_outlined),
               ),
               IconButton(
                 onPressed: () {
@@ -73,12 +74,12 @@ class _ProdutosPageState extends State<ProdutosPage> {
                     MaterialPageRoute(builder: (_) => CarrinhoPage()),
                   );
                 },
-                icon: Icon(Icons.shopping_cart),
+                icon: Icon(Icons.shopping_cart_outlined),
               ),
               IconButton(
                 onPressed: () {
                   Navigator.of(context).push(
-                    MaterialPageRoute(builder: (_) => LoginPage()),
+                    MaterialPageRoute(builder: (_) => PerfilPage()),
                   );
                 },
                 icon: Icon(Icons.person_outline_rounded),
