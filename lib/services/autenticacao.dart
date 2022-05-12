@@ -38,6 +38,7 @@ class Autenticacao extends ChangeNotifier {
       } else if (e.code == 'email-already-in-use') {
         throw AuthException('Este email já está cadastrado');
       }
+      
     }
   }
 

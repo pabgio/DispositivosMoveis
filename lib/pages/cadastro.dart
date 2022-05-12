@@ -28,17 +28,20 @@ class _CadastroPage extends State<CadastroPage> {
   verificaForm() {
     if (_formKeyCadastro.currentState!.validate()) {
       cadastrar();
+      _formKeyCadastro.currentState!.reset();
+      Navigator.of(context).push( MaterialPageRoute(builder: (_) => LoginPage()));
     }
   }
 
   cadastrar() async {
-    setState(() => loading = true);
+    setState(() => loading = false);
     try {
       await context.read<Autenticacao>().cadastrar(email.text, senha.text);
     } on AuthException catch (e) {
-      setState(() => loading = false);
+      setState(() => loading = true);
       ScaffoldMessenger.of(context)
           .showSnackBar(SnackBar(content: Text(e.message)));
+
     }
   }
 

@@ -87,7 +87,7 @@ class _PerfilPageState extends State<PerfilPage> {
                               color: Color(0xFFF5F6F3),
                               onPressed: () {},
                               child: Icon(
-                                Icons.camera,
+                                Icons.camera_alt_sharp,
                                 color: Colors.white,
                               ),
                             ),

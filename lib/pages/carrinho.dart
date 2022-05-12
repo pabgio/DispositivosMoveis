@@ -10,6 +10,7 @@ class CarrinhoPage extends StatefulWidget {
 
   @override
   _CarrinhoPageState createState() => _CarrinhoPageState();
+  
 }
 
 class _CarrinhoPageState extends State<CarrinhoPage> {

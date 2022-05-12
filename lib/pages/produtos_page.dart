@@ -37,24 +37,10 @@ class _ProdutosPageState extends State<ProdutosPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-       centerTitle: true,
+        centerTitle: true,
         title: const Text('Manda Cakes'),
-        actions: [
-           Padding(
-             padding: const  EdgeInsets.only( top: 20, left: 0, right: 0, bottom: 10),
-             child: Text('Sair'),
-           ),
-          Padding(
-            padding: const  EdgeInsets.only( top: 5, left: 0, right: 0, bottom: 0),
-            child: IconButton(
-              onPressed: ()=> context.read<Autenticacao>().logout(),
-              icon: Icon(Icons.exit_to_app_sharp),
-              
-            ),
-          ),
-        ],
       ),
-      bottomNavigationBar: BottomAppBar (
+      bottomNavigationBar: BottomAppBar(
         child: Container(
           height: 50,
           child: Row(
@@ -98,12 +84,12 @@ class _ProdutosPageState extends State<ProdutosPage> {
               return ListTile(
                 leading: ClipRRect(
                   borderRadius: BorderRadius.circular(20),
-                    child: Hero(
-                        tag: 'produto_${produtolist[index].id}',
-                        child: Image.asset(
-                            'assets/Produtos/${produtolist[index].id}.jpg'),
-                            ),
-                            ),
+                  child: Hero(
+                    tag: 'produto_${produtolist[index].id}',
+                    child: Image.asset(
+                        'assets/Produtos/${produtolist[index].id}.jpg'),
+                  ),
+                ),
                 title: Text(produtolist[index].descricao),
                 subtitle: Text('${produtolist[index].valor} Reais'),
                 onTap: () => detalhes(produtolist[index]),

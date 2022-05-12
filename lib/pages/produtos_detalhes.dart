@@ -68,6 +68,7 @@ class ProdutoDetalhePage extends StatelessWidget {
                           ),
                         ),
                         onPressed: () {
+                          //carrinho.add(produto);
                           Navigator.of(context).pop();
                         },
                       ),
