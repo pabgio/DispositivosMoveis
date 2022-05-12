@@ -60,7 +60,8 @@ class _ProdutosPageState extends State<ProdutosPage> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              IconButton(
+              TextButton.icon(
+                label: Text('Home'),
                 onPressed: () {
                   Navigator.of(context).push(
                     MaterialPageRoute(builder: (_) => ProdutosPage()),
@@ -68,7 +69,8 @@ class _ProdutosPageState extends State<ProdutosPage> {
                 },
                 icon: Icon(Icons.home_max_outlined),
               ),
-              IconButton(
+              TextButton.icon(
+                label: Text('Carrinho'),
                 onPressed: () {
                   Navigator.of(context).push(
                     MaterialPageRoute(builder: (_) => CarrinhoPage()),
@@ -76,7 +78,8 @@ class _ProdutosPageState extends State<ProdutosPage> {
                 },
                 icon: Icon(Icons.shopping_cart_outlined),
               ),
-              IconButton(
+              TextButton.icon(
+                label: Text('Perfil'),
                 onPressed: () {
                   Navigator.of(context).push(
                     MaterialPageRoute(builder: (_) => PerfilPage()),
