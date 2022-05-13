@@ -1,7 +1,7 @@
+
 import 'package:flutter/material.dart';
 import 'package:mandaCakes/meuApp.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:mandaCakes/pages/perfil_page.dart';
 import 'package:mandaCakes/repositories/carrinho_repositorie.dart';
 import 'package:provider/provider.dart';
 import 'meuApp.dart';
@@ -17,7 +17,9 @@ void main() async {
     MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => Autenticacao()),
-        ChangeNotifierProvider(create: (_) => CarrinhoRepository()),
+        ChangeNotifierProvider(create: (_) => CarrinhoRepository(
+          auth: _.read<Autenticacao>(),
+        )),
       ],
       child: meuApp(),
     ),

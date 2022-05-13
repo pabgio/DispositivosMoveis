@@ -1,37 +1,62 @@
-import 'package:flutter/cupertino.dart';
-import 'package:mandaCakes/models/produtos.dart';
-import 'package:mandaCakes/repositories/carrinho_repositorie.dart';
+import "dart:collection";
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:mandaCakes/database/db_firestore.dart';
 import 'package:mandaCakes/repositories/produto_repositorie.dart';
-import 'package:sqflite/sqflite.dart';
+import 'package:mandaCakes/services/autenticacao.dart';
 
-import '../database/db.dart';
+import '../models/produtos.dart';
+import 'package:flutter/material.dart';
 
 class CarrinhoRepository extends ChangeNotifier {
-   late Database db;
-   List <Produtos> _carrinho = [];
+  final List<Produto> _lista = [];
+  late FirebaseFirestore db;
+  late Autenticacao auth;
 
-   List<Produtos> get carrinho => _carrinho;
+  CarrinhoRepository({required this.auth}) {
+    _startRepository();
+  }
 
-    CarrinhoRepository() {
-      _initRepository();
+  _startRepository() async {
+    await _startFirestore();
+    await reeadCarrinho();
+  }
+
+  _startFirestore() async {
+    db = FireStroredb.get();
+  }
+
+  Future reeadCarrinho() async {
+    if (auth.usuario != null && _lista.isEmpty) {
+       final snapshot =
+          await db.collection('usuarios/${auth.usuario!.uid}/carrinho').get();
+      snapshot.docs.forEach((doc) {
+        Produto produtos;
+        produtos= ProdutoRepository.tabela.firstWhere((produto) => produto.id == doc.get('id'));
+        _lista.add(produtos);
+        notifyListeners();
+      });
     }
+  }
 
-  get Produto => null;
+  save(List<Produto> produto) {
+    produto.forEach((produtos) async {
+      if (produtos.quantidade > 0) {
+        _lista.add(produtos);
+        await db
+            .collection('usuarios/${auth.usuario!.uid}/carrinho')
+            .doc(produtos.descricao)
+            .set({
+          'produto': produtos.descricao,
+          'quantidade': produtos.quantidade,
+          'preco': produtos.valor,
+        });
+      }
+      ;
+    });
+  }
 
-    _initRepository() async {
-      await getProdutos();
-      
-
-
-    }
-
-    getProdutos() async {
-     _carrinho = [];
-      
-    
-      notifyListeners();
-    }
-}
-
-class Produtos {
+  void add(Produto produto) {
+    _lista.add(produto);
+    notifyListeners();
+  }
 }

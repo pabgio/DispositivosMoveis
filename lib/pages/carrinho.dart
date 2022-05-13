@@ -16,6 +16,7 @@ class CarrinhoPage extends StatefulWidget {
 class _CarrinhoPageState extends State<CarrinhoPage> {
   int quantidade=0;
   late CarrinhoRepository carrinho;
+  
   @override
   Widget build(BuildContext context) {
     carrinho =context.watch<CarrinhoRepository>();
@@ -49,13 +50,7 @@ class _CarrinhoPageState extends State<CarrinhoPage> {
               ),
 
             ),
-            Padding(
-              padding: const EdgeInsets.only(top: 20),
-              child: Text(
-                '${carrinho.Produto} Produtos',
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-              ),
-            ),
+          
 
           ],
 

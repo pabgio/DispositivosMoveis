@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:mandaCakes/pages/produtos_page.dart';
 import 'package:mandaCakes/pages/login.dart';
 import 'package:mandaCakes/services/autenticacao.dart';
@@ -19,8 +20,10 @@ class _AuthCheckState extends State<AuthCheck> {
     if (auth.isLoading) {
       return loading();
     } else if (auth.usuario == null) {
+      FirebaseAuth.instance.userChanges();
       return LoginPage();
     } else
+       FirebaseAuth.instance.userChanges();
       return ProdutosPage();
   }
 
@@ -28,6 +31,7 @@ class _AuthCheckState extends State<AuthCheck> {
     return Scaffold(
       body: Center(
         child: CircularProgressIndicator(),
+
       ),
     );
   }

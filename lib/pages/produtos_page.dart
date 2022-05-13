@@ -24,7 +24,7 @@ class _ProdutosPageState extends State<ProdutosPage> {
   void initState() {
     super.initState();
     produtosRepository = ProdutoRepository();
-    produtolist = produtosRepository.produtos;
+    produtolist = ProdutoRepository.tabela;
   }
 
   detalhes(Produto produto) {

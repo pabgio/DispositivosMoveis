@@ -1,11 +1,8 @@
 import 'package:mandaCakes/models/produtos.dart';
 
 class ProdutoRepository {
-  List<Produto> produtos = [];
-
-  ProdutoRepository() {
-    produtos = [
-      Produto(
+static  List<Produto> tabela = [
+    Produto(
         id: 1,
         nome: 'Morango',
         descricao: 'Bolo de Morango',
@@ -54,6 +51,6 @@ class ProdutoRepository {
         valor: 5,
         quantidade: 0,
       ),
-    ];
-  }
+  ];
+
 }

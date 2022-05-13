@@ -19,6 +19,7 @@ class Autenticacao extends ChangeNotifier {
     _auth.authStateChanges().listen((User? user) {
       usuario = (user == null) ? null : user;
       isLoading = false;
+
       notifyListeners();
     });
   }
@@ -56,6 +57,7 @@ class Autenticacao extends ChangeNotifier {
   }
 
   logout() async {
+    FirebaseAuth.instance.userChanges();
     await _auth.signOut();
     _getUser();
   }
