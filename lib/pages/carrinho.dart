@@ -10,56 +10,55 @@ class CarrinhoPage extends StatefulWidget {
 
   @override
   _CarrinhoPageState createState() => _CarrinhoPageState();
-  
 }
 
 class _CarrinhoPageState extends State<CarrinhoPage> {
-  int quantidade=0;
+  int quantidade = 0;
   late CarrinhoRepository carrinho;
-  
+
   @override
   Widget build(BuildContext context) {
-    carrinho =context.watch<CarrinhoRepository>();
+    carrinho = context.watch<CarrinhoRepository>();
     return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: const Text('Manda Cakes'),
-        actions: [
-          Padding(
-            padding: const  EdgeInsets.only( top: 20, left: 0, right: 0, bottom: 10),
-            child: Text('Sair'),
-          ),
-          Padding(
-            padding: const  EdgeInsets.only( top: 5, left: 0, right: 0, bottom: 0),
-            child: IconButton(
-              onPressed: ()=> context.read<Autenticacao>().logout(),
-              icon: Icon(Icons.exit_to_app_sharp),
-            ),
-          ),
-        ],
-      ),
-      body: SingleChildScrollView(
-        padding: EdgeInsets.all(10),
-        child: Column(
-          children: [
+        appBar: AppBar(
+          centerTitle: true,
+          title: const Text('Manda Cakes'),
+          actions: [
             Padding(
-              padding: const EdgeInsets.only(top: 20),
-              child: Text(
-                'Carrinho',
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-              ),
-
+              padding:
+                  const EdgeInsets.only(top: 20, left: 0, right: 0, bottom: 10),
+              child: Text('Sair'),
             ),
-          
-
+            Padding(
+              padding:
+                  const EdgeInsets.only(top: 5, left: 0, right: 0, bottom: 0),
+              child: IconButton(
+                onPressed: () => context.read<Autenticacao>().logout(),
+                icon: Icon(Icons.exit_to_app_sharp),
+              ),
+            ),
           ],
-
-
+        ),
+        body: SingleChildScrollView(
+            padding: EdgeInsets.all(10),
+            child: Column(
+            
+              children: carrinho.produtos.map((produto) {
+                return ListTile(
+                  leading: const Icon(Icons.cake_rounded),
+                  title: Text(produto.nome),
+                  subtitle: Text(r'R$ ' '${produto.valor}'),
+                  trailing: IconButton(
+                    icon: const Icon(Icons.remove_circle_outline),
+                    onPressed: () {
+                      carrinho.remove(produto);
+                    },
+                  ),
+                );
+              }).toList(),
             )
-          
-        )
-    );  
-
+            
+            )
+            );
   }
-  
-  }
+}

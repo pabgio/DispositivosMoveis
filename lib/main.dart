@@ -8,7 +8,7 @@ import 'meuApp.dart';
 import 'package:mandaCakes/services/autenticacao.dart';
 import 'firebase_options.dart';
 
-void main() async {
+void main() async { 
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
@@ -21,7 +21,7 @@ void main() async {
           auth: _.read<Autenticacao>(),
         )),
       ],
-      child: meuApp(),
+      child: const meuApp(),
     ),
   );
 }

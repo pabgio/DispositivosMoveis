@@ -9,7 +9,7 @@ class AuthException implements Exception {
 class Autenticacao extends ChangeNotifier {
   FirebaseAuth _auth = FirebaseAuth.instance;
   User? usuario;
-  bool isLoading = true;
+  bool isLoading = false;
 
   Autenticacao() {
     _authCheck();
@@ -19,8 +19,7 @@ class Autenticacao extends ChangeNotifier {
     _auth.authStateChanges().listen((User? user) {
       usuario = (user == null) ? null : user;
       isLoading = false;
-
-      notifyListeners();
+    notifyListeners();
     });
   }
 
@@ -44,8 +43,11 @@ class Autenticacao extends ChangeNotifier {
   }
 
   login(String email, String senha) async {
+       FirebaseAuth.instance.userChanges();
+
     try {
       await _auth.signInWithEmailAndPassword(email: email, password: senha);
+
       _getUser();
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
@@ -57,8 +59,10 @@ class Autenticacao extends ChangeNotifier {
   }
 
   logout() async {
-    FirebaseAuth.instance.userChanges();
+       FirebaseAuth.instance.userChanges();
+
     await _auth.signOut();
     _getUser();
+
   }
 }

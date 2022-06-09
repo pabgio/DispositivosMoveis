@@ -19,11 +19,13 @@ class _AuthCheckState extends State<AuthCheck> {
 
     if (auth.isLoading) {
       return loading();
-    } else if (auth.usuario == null) {
-      FirebaseAuth.instance.userChanges();
+    } if (auth.usuario ==null) {
+         FirebaseAuth.instance.userChanges();
+
       return LoginPage();
     } else
        FirebaseAuth.instance.userChanges();
+
       return ProdutosPage();
   }
 
