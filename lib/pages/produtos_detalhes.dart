@@ -6,19 +6,18 @@ import '../models/produtos.dart';
 import '../repositories/carrinho_repositorie.dart';
 
 class ProdutoDetalhePage extends StatelessWidget {
-  final Produto produto;
-   ProdutoDetalhePage({Key? key, required this.produto}) : super(key: key);
+  List<Produto> produto = [];
+  ProdutoDetalhePage({Key? key, required this.produto}) : super(key: key);
   late CarrinhoRepository carrinho;
-
 
   @override
   Widget build(BuildContext context) {
-    carrinho = Provider.of<CarrinhoRepository>(context, listen: false);
+    final carrinho = context.watch<CarrinhoRepository>();
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
         centerTitle: true,
-        title: Text('Bolo de ${produto.nome}'),
+        title: Text('Bolo de ${produto.first.nome}'),
         elevation: 0,
       ),
       body: SingleChildScrollView(
@@ -40,9 +39,9 @@ class ProdutoDetalhePage extends StatelessWidget {
                     ),
                     child: ClipRRect(
                       child: Hero(
-                          tag: 'produto_${produto.id}',
-                          child:
-                              Image.asset('assets/Produtos/${produto.id}.jpg')),
+                          tag: 'produto_${produto.first.id}',
+                          child: Image.asset(
+                              'assets/Produtos/${produto.first.id}.jpg')),
                     ),
                   ),
                   SizedBox(
@@ -53,8 +52,11 @@ class ProdutoDetalhePage extends StatelessWidget {
                     child: Column(children: [
                       ListTile(
                         leading: const Icon(Icons.cake_rounded),
-                        title: Text(produto.descricao),
-                        subtitle: Text(r'R$ ' '${produto.valor}'),
+                        title: Text(produto.first.descricao),
+                        subtitle: Text(r'R$ ' '${produto.first.valor}'),
+                      ),
+                      SizedBox(
+                        height: 20,
                       ),
                       ElevatedButton.icon(
                         icon: const Icon(Icons.add_shopping_cart),
@@ -69,15 +71,14 @@ class ProdutoDetalhePage extends StatelessWidget {
                         ),
                         onPressed: () {
                           carrinho.save(produto);
+                          ChangeNotifier notifier =
+                              context.read<CarrinhoRepository>();
                           Navigator.of(context).pop();
-
                         },
-                        
                       ),
                       SizedBox(
                         height: 20,
                       ),
-                      
                     ]),
                   ),
                 ],

@@ -59,10 +59,11 @@ class Autenticacao extends ChangeNotifier {
   }
 
   logout() async {
-       FirebaseAuth.instance.userChanges();
-
+   FirebaseAuth.instance.userChanges();
     await _auth.signOut();
     _getUser();
+       notifyListeners();
+
 
   }
 }

@@ -16,9 +16,16 @@ class _CarrinhoPageState extends State<CarrinhoPage> {
   int quantidade = 0;
   late CarrinhoRepository carrinho;
 
+@override
+  void initState(){
+    super.initState();
+
+  }
+
   @override
   Widget build(BuildContext context) {
-    carrinho = context.watch<CarrinhoRepository>();
+    final carrinho = context.watch<CarrinhoRepository>();
+
     return Scaffold(
         appBar: AppBar(
           centerTitle: true,
@@ -39,26 +46,29 @@ class _CarrinhoPageState extends State<CarrinhoPage> {
             ),
           ],
         ),
-        body: SingleChildScrollView(
-            padding: EdgeInsets.all(10),
-            child: Column(
+        body: Padding (padding:
+        EdgeInsets.all(12) ,
+        child: Column (children: [
+          ListTile(
+            title: Text ('Carrinho'),
+            subtitle: Text ('carrinho.read()'),
+          )
+           
+        ],
+        ),
+        ),
+        bottomNavigationBar: Container(
+          height: 50,
+          child: ElevatedButton(
+            onPressed: () {
+              Navigator.pushNamed(context, '/pedidos');
+            },
+            child: Text('Finalizar Pedido'),
+          ),
+        ),
+        
+        );
+        
             
-              children: carrinho.produtos.map((produto) {
-                return ListTile(
-                  leading: const Icon(Icons.cake_rounded),
-                  title: Text(produto.nome),
-                  subtitle: Text(r'R$ ' '${produto.valor}'),
-                  trailing: IconButton(
-                    icon: const Icon(Icons.remove_circle_outline),
-                    onPressed: () {
-                      carrinho.remove(produto);
-                    },
-                  ),
-                );
-              }).toList(),
-            )
-            
-            )
-            );
   }
 }

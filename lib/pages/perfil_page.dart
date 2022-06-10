@@ -151,10 +151,9 @@ class _PerfilPageState extends State<PerfilPage> {
                   child: FlatButton(
                     padding: EdgeInsets.all(20),
                     color: Color(0XFFF5F6F9),
-                    onPressed: () {
-                      Provider.of<Autenticacao>(context, listen: false)
-                          .logout();
-                    },
+                    onPressed: () => context.read<Autenticacao>().logout(),
+                    
+                    
                     child: Row(
                       children: [
                         Icon(

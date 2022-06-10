@@ -29,7 +29,7 @@ class _ProdutosPageState extends State<ProdutosPage> {
 
   detalhes(Produto produto) {
     Navigator.of(context).push(
-      MaterialPageRoute(builder: (_) => ProdutoDetalhePage(produto: produto)),
+      MaterialPageRoute(builder: (_) => ProdutoDetalhePage( produto:[produto] )),
     );
   }
 
