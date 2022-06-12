@@ -1,92 +1,176 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:mandaCakes/models/itens.dart';
 import 'package:mandaCakes/repositories/carrinho_repositorie.dart';
 import 'package:provider/provider.dart';
 
 import '../models/produtos.dart';
 import '../repositories/carrinho_repositorie.dart';
 
-class ProdutoDetalhePage extends StatelessWidget {
-  List<Produto> produto = [];
-  ProdutoDetalhePage({Key? key, required this.produto}) : super(key: key);
+class ProdutosDetalhes extends StatefulWidget {
+  Produto produto;
+  ProdutosDetalhes({Key? key, required this.produto}) : super(key: key);
+
+  @override
+  _ProdutosDetalhesState createState() => _ProdutosDetalhesState();
+}
+
+class _ProdutosDetalhesState extends State<ProdutosDetalhes> {
+  final _form = GlobalKey<FormState>();
+  final _qtde= TextEditingController();
+  double quantidade = 0;
   late CarrinhoRepository carrinho;
+
+comprar()async{
+  if(_form.currentState!.validate()){
+    await carrinho.addProduto(Itens(produto: widget.produto, quantidade: quantidade));
+    ScaffoldMessenger .of(context).showSnackBar(SnackBar(content: Text('Produto adicionado ao carrinho')));
+  }
+      Navigator.pop(context);
+
+}
 
   @override
   Widget build(BuildContext context) {
-    final carrinho = context.watch<CarrinhoRepository>();
+    carrinho= Provider.of<CarrinhoRepository>(context, listen: false);
+    var produto = widget.produto;
     return Scaffold(
-      backgroundColor: Colors.white,
       appBar: AppBar(
-        centerTitle: true,
-        title: Text('Bolo de ${produto.first.nome}'),
-        elevation: 0,
+        title: Text(produto.nome),
+        
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            SizedBox(
-              height: 10,
-            ),
-            Padding(
-              padding: const EdgeInsets.all(24.0),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Container(
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(50),
-                    ),
-                    child: ClipRRect(
-                      child: Hero(
-                          tag: 'produto_${produto.first.id}',
-                          child: Image.asset(
-                              'assets/Produtos/${produto.first.id}.jpg')),
-                    ),
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  Card(
-                    elevation: 10,
-                    child: Column(children: [
-                      ListTile(
-                        leading: const Icon(Icons.cake_rounded),
-                        title: Text(produto.first.descricao),
-                        subtitle: Text(r'R$ ' '${produto.first.valor}'),
-                      ),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      ElevatedButton.icon(
-                        icon: const Icon(Icons.add_shopping_cart),
-                        label: const Text('Adicionar ao Carrinho'),
-                        style: ButtonStyle(
-                          backgroundColor:
-                              MaterialStateProperty.all<Color>(Colors.green),
-                          shape: MaterialStateProperty.all(
-                            RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(20)),
-                          ),
+        body: SingleChildScrollView(
+          
+          child: Container(
+           width:  MediaQuery.of(context).size.width,
+           height: MediaQuery.of(context).size.height,
+            child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  children: [
+                     Text(
+                              produto.descricao,
+                              style: TextStyle(
+                                fontSize: 26,
+                                fontWeight: FontWeight.bold,
+                                letterSpacing: -1,
+                                color: Colors.grey[800],
+                              ),
+                            ),
+                            SizedBox(
+                              height: 10,
+                            ),
+                    Padding(
+                        padding: const EdgeInsets.only(bottom: 24),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Card(
+                              
+                              child: SizedBox(
+                              
+                                child:
+                                    Image.asset('assets/Produtos/${produto.id}.jpg'),
+                                width: MediaQuery.of(context).size.width * 0.6,
+                              ),
+                            ),
+                           
+                          ],
+                        )
+                        
                         ),
-                        onPressed: () {
-                          carrinho.save(produto);
-                          ChangeNotifier notifier =
-                              context.read<CarrinhoRepository>();
-                          Navigator.of(context).pop();
-                        },
-                      ),
-                      SizedBox(
-                        height: 20,
-                      ),
-                    ]),
-                  ),
-                ],
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
+                       
+                        (quantidade > 0)
+                        ? SizedBox(
+                          width: MediaQuery.of(context).size.width,
+                          child: Container(
+                            child: Text(
+                              '$quantidade ${widget.produto.descricao}',
+                              style: TextStyle(
+                                fontSize: 20,
+                  
+                                color: Colors.teal,
+                              ),
+                            ),
+                            margin: EdgeInsets.only(bottom: 24),
+                            alignment: Alignment.center,
+        
+                            ),
+                            
+        
+                          )
+                          : SizedBox(),
+                          SizedBox(
+                            width:200,
+                            height: 60,
+                            child: Form(
+                              key:  _form,
+                              child: TextFormField(
+                               controller: _qtde,
+                               style: TextStyle(fontSize: 18),
+                               decoration: InputDecoration(
+                                border: OutlineInputBorder(),
+                                labelText: 'Quantidade',
+                                prefixIcon: Icon(Icons.add_circle_outline),
+                                
+                                
+                               ),
+                             keyboardType: TextInputType.number,
+                             inputFormatters: [
+                               FilteringTextInputFormatter.digitsOnly],
+                              validator: (value) {
+                                if (value!.isEmpty) {
+                                  return 'Informe a quantidade';
+                                }
+                                if(value == '0'){
+                                  return 'Informe a quantidade';
+                                }
+                                return null;
+                              },
+                              onChanged: (value){
+                                setState(() {
+                                  quantidade =(value.isEmpty)?0: double.parse(value) * widget.produto.valor;
+                                }
+                                );
+                                
+                              },
+        
+                              ),
+                              ),
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+        
+                            SizedBox(
+                              width: 150,
+                              height: 40,
+                              child: ElevatedButton(
+                                onPressed: comprar,
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Icon(Icons.add_shopping_cart),
+                                    Padding(
+                                      padding: const EdgeInsets.all(14),
+                                      child: Text('Comprar',
+                                      style: TextStyle(fontSize: 12),),
+                                      
+                                    ),
+                                  ],
+                                ),
+                                )
+                              )
+                            
+                       
+                  ],
+                  
+                )
+                ),
+          ),
+        )
+
+            );
   }
 }

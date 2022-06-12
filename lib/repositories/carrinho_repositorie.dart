@@ -1,94 +1,54 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:mandaCakes/database/db_firestore.dart';
-import 'package:mandaCakes/repositories/produto_repositorie.dart';
-import 'package:mandaCakes/services/autenticacao.dart';
 
+import 'package:flutter/cupertino.dart';
+import 'package:sqflite/sqflite.dart';
+import 'package:mandaCakes/database/db.dart';
+import '../models/itens.dart';
 import '../models/produtos.dart';
-import 'package:flutter/material.dart';
+import 'produto_repositorie.dart';
 
 class CarrinhoRepository extends ChangeNotifier {
-  final List<Produto> lista = [];
-  late FirebaseFirestore db;
-  late Autenticacao auth;
+  late Database db;
+  List <Itens> _carrinho = [];
+  double _total = 0;
 
-  CarrinhoRepository({required this.auth}) {
-    _startRepository();
+  List <Itens> get carrinho => _carrinho;
+  double get total => _total;
+  CarrinhoRepository() {
+    _initRepository();
+    
   }
 
-  get total => null;
+  _initRepository() async {
+   await _getItens();   
+  }
 
-  get produto => null;
+  _getTotal() async {
+    db = await DB.instance.database;
+    List  list = await db.query('carrinho');
+    _total = carrinho.first.produto.valor * carrinho.first.quantidade;
+    
+    notifyListeners();
+  }
+  _getItens() async {
+   db = await DB.instance.database;
+    List list = await db.query('carrinho');
+    //await _getTotal();
+    notifyListeners();
+   }
+
   
-  _startRepository() async {
-    await _startFirestore();
-    await readCarrinho();
-  }
-
-  _startFirestore() async {
-    db = FireStroredb.get();
-  }
-
- readCarrinho() async {
-    if (auth.usuario != null && lista.isEmpty) {
-       final snapshot =
-          await db.collection('usuarios/${auth.usuario!.uid}/carrinho').get();
-      snapshot.docs.forEach((doc) {
-        Produto produto;
-        produto= ProdutoRepository.tabela.firstWhere((produto) => produto.id == doc.get('id'));
-        lista.add(produto);
-        notifyListeners();
-      });
-    }
-  }
-
-  save(List <Produto> produto) async {
-     produto.forEach((produto) async {
-      if (produto.quantidade > 0) {
-        lista.add(produto);
-        await db
-            .collection('usuarios/${auth.usuario!.uid}/carrinho')
-            .doc(produto.descricao)
-            .set({
-          'produto': produto.descricao,
-          'quantidade': produto.quantidade,
-          'preco': produto.valor,
-        });
-        notifyListeners();
-      }
-      ;
-    });
-  }
-
-  remove(produto) {
-    lista.removeWhere((p) => p.descricao == produto.descricao);
-    db
-        .collection('usuarios/${auth.usuario!.uid}/carrinho')
-        .doc(produto.descricao)
-        .delete();
-  }
-
-  clear() {
-    lista.clear();
-    db.collection('usuarios/${auth.usuario!.uid}/carrinho').get().then((snapshot) {
-      snapshot.docs.forEach((doc) {
-        doc.reference.delete();
-      });
-    });
-  }
-
-
-   totalCarrinho() {
-    double total = 0;
-    lista.forEach((produto) {
-      total += produto.quantidade * produto.valor;
-    });
-    return total;
-  }
 
   void removeProduto(produto) {}
 
-  
-  
+   addProduto(Itens first)  async{
+    db = await DB.instance.database;
+    db.update('carrinho',{
+      'produto': first.produto.id,
+      //'quantidade': first.quantidade
+    },where: 'id = ?',whereArgs: [first.produto.id]);
+    _getItens();
+     notifyListeners();
+    }
 
- 
-}
+   
+  } 

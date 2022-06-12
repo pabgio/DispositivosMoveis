@@ -18,7 +18,6 @@ void main() async {
       providers: [
         ChangeNotifierProvider(create: (_) => Autenticacao()),
         ChangeNotifierProvider(create: (_) => CarrinhoRepository(
-          auth: _.read<Autenticacao>(),
         )),
       ],
       child: const meuApp(),

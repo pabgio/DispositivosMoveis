@@ -2,7 +2,7 @@ import 'package:mandaCakes/models/produtos.dart';
 
 class Itens{
     Produto produto;
-    int quantidade;
+    double quantidade;
 
 
     Itens({
