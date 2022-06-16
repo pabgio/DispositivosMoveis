@@ -29,6 +29,16 @@ class DefaultFirebaseOptions {
           'DefaultFirebaseOptions have not been configured for macos - '
           'you can reconfigure this by running the FlutterFire CLI again.',
         );
+      case TargetPlatform.windows:
+        throw UnsupportedError(
+          'DefaultFirebaseOptions have not been configured for windows - '
+          'you can reconfigure this by running the FlutterFire CLI again.',
+        );
+      case TargetPlatform.linux:
+        throw UnsupportedError(
+          'DefaultFirebaseOptions have not been configured for linux - '
+          'you can reconfigure this by running the FlutterFire CLI again.',
+        );
       default:
         throw UnsupportedError(
           'DefaultFirebaseOptions are not supported for this platform.',
@@ -38,12 +48,12 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions web = FirebaseOptions(
     apiKey: 'AIzaSyA10cKaHnvywBJBWdILWXFv7xWI3oywbjg',
-    appId: '1:965812952660:web:972d5739ddd1606e6f57c1',
+    appId: '1:965812952660:web:b74959ef4590dc6e6f57c1',
     messagingSenderId: '965812952660',
     projectId: 'mandacakes-8d75d',
     authDomain: 'mandacakes-8d75d.firebaseapp.com',
     storageBucket: 'mandacakes-8d75d.appspot.com',
-    measurementId: 'G-2FSQST0VSW',
+    measurementId: 'G-B82PDFYQ67',
   );
 
   static const FirebaseOptions android = FirebaseOptions(

@@ -1,176 +1,192 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:mandaCakes/models/itens.dart';
-import 'package:mandaCakes/repositories/carrinho_repositorie.dart';
 import 'package:provider/provider.dart';
-
+import 'package:mandaCakes/controller/homeController.dart';
 import '../models/produtos.dart';
-import '../repositories/carrinho_repositorie.dart';
+import 'package:get/get.dart';
+import 'package:mandaCakes/widgets/CustomButton.dart';
+import 'package:mandaCakes/widgets/DotWidget.dart';
 
-class ProdutosDetalhes extends StatefulWidget {
-  Produto produto;
-  ProdutosDetalhes({Key? key, required this.produto}) : super(key: key);
+class ProdutoDetalhePage extends StatefulWidget {
+  final int produtoId;
+
+  ProdutoDetalhePage({required this.produtoId});
 
   @override
-  _ProdutosDetalhesState createState() => _ProdutosDetalhesState();
+  _ProdutoDetalhePageState createState() => _ProdutoDetalhePageState();
 }
 
-class _ProdutosDetalhesState extends State<ProdutosDetalhes> {
-  final _form = GlobalKey<FormState>();
-  final _qtde= TextEditingController();
-  double quantidade = 0;
-  late CarrinhoRepository carrinho;
+class _ProdutoDetalhePageState extends State<ProdutoDetalhePage> {
+  late PageController pageController;
+  int active = 0;
 
-comprar()async{
-  if(_form.currentState!.validate()){
-    await carrinho.addProduto(Itens(produto: widget.produto, quantidade: quantidade));
-    ScaffoldMessenger .of(context).showSnackBar(SnackBar(content: Text('Produto adicionado ao carrinho')));
+  @override
+  void initState() {
+    super.initState();
+    pageController = PageController(initialPage: 0);
   }
-      Navigator.pop(context);
 
-}
+  Widget buildDot(int index, int num) {
+    return Padding(
+        padding: EdgeInsets.all(5.0),
+        child: Container(
+          height: 10.0,
+          width: 10.0,
+          decoration: BoxDecoration(
+              color: (num == index) ? Colors.black38 : Colors.grey[200],
+              shape: BoxShape.circle),
+        ));
+  }
 
   @override
   Widget build(BuildContext context) {
-    carrinho= Provider.of<CarrinhoRepository>(context, listen: false);
-    var produto = widget.produto;
+    HomeController controller = Get.find<HomeController>();
+    Produto model = controller.getProduto(widget.produtoId);
     return Scaffold(
       appBar: AppBar(
-        title: Text(produto.nome),
-        
+        elevation: 0,
       ),
-        body: SingleChildScrollView(
-          
-          child: Container(
-           width:  MediaQuery.of(context).size.width,
-           height: MediaQuery.of(context).size.height,
-            child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Column(
-                  children: [
-                     Text(
-                              produto.descricao,
-                              style: TextStyle(
-                                fontSize: 26,
-                                fontWeight: FontWeight.bold,
-                                letterSpacing: -1,
-                                color: Colors.grey[800],
-                              ),
-                            ),
-                            SizedBox(
-                              height: 10,
-                            ),
-                    Padding(
-                        padding: const EdgeInsets.only(bottom: 24),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Card(
-                              
-                              child: SizedBox(
-                              
-                                child:
-                                    Image.asset('assets/Produtos/${produto.id}.jpg'),
-                                width: MediaQuery.of(context).size.width * 0.6,
-                              ),
-                            ),
-                           
-                          ],
-                        )
-                        
-                        ),
-                       
-                        (quantidade > 0)
-                        ? SizedBox(
-                          width: MediaQuery.of(context).size.width,
-                          child: Container(
-                            child: Text(
-                              '$quantidade ${widget.produto.descricao}',
-                              style: TextStyle(
-                                fontSize: 20,
-                  
-                                color: Colors.teal,
-                              ),
-                            ),
-                            margin: EdgeInsets.only(bottom: 24),
-                            alignment: Alignment.center,
-        
-                            ),
-                            
-        
-                          )
-                          : SizedBox(),
-                          SizedBox(
-                            width:200,
-                            height: 60,
-                            child: Form(
-                              key:  _form,
-                              child: TextFormField(
-                               controller: _qtde,
-                               style: TextStyle(fontSize: 18),
-                               decoration: InputDecoration(
-                                border: OutlineInputBorder(),
-                                labelText: 'Quantidade',
-                                prefixIcon: Icon(Icons.add_circle_outline),
-                                
-                                
-                               ),
-                             keyboardType: TextInputType.number,
-                             inputFormatters: [
-                               FilteringTextInputFormatter.digitsOnly],
-                              validator: (value) {
-                                if (value!.isEmpty) {
-                                  return 'Informe a quantidade';
-                                }
-                                if(value == '0'){
-                                  return 'Informe a quantidade';
-                                }
-                                return null;
-                              },
-                              onChanged: (value){
-                                setState(() {
-                                  quantidade =(value.isEmpty)?0: double.parse(value) * widget.produto.valor;
-                                }
-                                );
-                                
-                              },
-        
-                              ),
-                              ),
-                          ),
-                          SizedBox(
-                            height: 10,
-                          ),
-        
-                            SizedBox(
-                              width: 150,
-                              height: 40,
-                              child: ElevatedButton(
-                                onPressed: comprar,
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Icon(Icons.add_shopping_cart),
-                                    Padding(
-                                      padding: const EdgeInsets.all(14),
-                                      child: Text('Comprar',
-                                      style: TextStyle(fontSize: 12),),
-                                      
-                                    ),
-                                  ],
-                                ),
-                                )
-                              )
-                            
-                       
-                  ],
-                  
-                )
-                ),
+      body: Container(
+        decoration: BoxDecoration(
+          border: Border(
+            top: BorderSide(
+              color: Colors.grey.shade300,
+              width: 1.0,
+            ),
           ),
-        )
+        ),
+        child: ListView(
+          children: <Widget>[
+            Stack(children: <Widget>[
+              Container(
+                height: 200,
+                color: Colors.white,
+                child: Column(
+                  children: <Widget> [
+                    Container(
+                      height: 200,
+                      child: PageView(
+                        controller: pageController,
+                        onPageChanged: (index) {
+                          setState(() {
+                            active = index;
+                          });
+                        },
+                        children: <Widget>[
+                          Image.asset(
+                            model.imagem,
+                            height: 150,
+                          ),
+                          Image.asset(
+                            model.imagem,
+                            height: 150,
+                          ),
+                          Image.asset(
+                            model.imagem,
+                            height: 150,
+                          ),
+                        ],
+                      ),
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        DotWidget(activeIndex: active, dotIndex: 0),
+                        DotWidget(activeIndex: active, dotIndex: 1),
+                        DotWidget(activeIndex: active, dotIndex: 2),
+                        DotWidget(activeIndex: active, dotIndex: 3),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ]
+            ),
 
-            );
+            Divider(
+              color: Colors.grey[300],
+              height: 1.0,
+            ),
+            Container(
+              padding: EdgeInsets.symmetric(horizontal: 50.0, vertical: 20.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text(
+                    model.nome,
+                    style:
+                        TextStyle(fontWeight: FontWeight.w500, fontSize: 19.0),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(top: 10.0),
+                  )
+                ],
+              ),
+            )
+          ],
+        ),
+      ),
+      bottomNavigationBar: Container(
+          margin: EdgeInsets.only(bottom: 18.0),
+          height: 60.0,
+          decoration: BoxDecoration(
+              color: Colors.white,
+              border: Border(
+                  top: BorderSide(color: Colors.grey.shade300, width: 1.0))),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: <Widget>[
+              Container(
+                child: Row(
+                  children: <Widget>[
+                    Container(
+                      width: 60.0,
+                      child: Text(
+                        "Total Amount",
+                        style: TextStyle(fontSize: 12.0, color: Colors.grey),
+                      ),
+                    ),
+                    Text("\$${model.valor.toString()}",
+                        style: TextStyle(
+                            fontSize: 25.0, fontWeight: FontWeight.w600)),
+                  ],
+                ),
+              ),
+              GetBuilder<HomeController>(builder: (_) {
+                bool isAdded = controller.carrinhoPronto(model.id);
+                if (isAdded) {
+                  return CustomButton(
+                    name: "REMOVE CART",
+                    onTap: () async {
+                      try {
+                        controller.removedoCarrinho(model.id);
+                        ScaffoldMessenger.of(context)
+                            .showSnackBar(SnackBar(content: Text("Item removed from cart successfully")));
+                      } catch (e) {
+                        print(e);
+                      }
+                    },
+                  );
+                }
+                return CustomButton(
+                  name: "ADD TO CART",
+                  onTap: controller.loading ? null : ()  async {
+                    try {
+                      var result = await controller.addNoCarrinho(model);
+                      controller.getCarrinhoLista();
+                      ScaffoldMessenger.of(context)
+                          .showSnackBar(SnackBar(content: Text("Item added in cart successfully")));
+                    } catch (e) {
+                      print(e);
+                    }
+                  },
+                );
+              })
+            ],
+          )),
+    );
   }
 }
