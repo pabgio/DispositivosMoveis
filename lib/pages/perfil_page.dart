@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:mandaCakes/pages/produtos_page.dart';
-import 'package:mandaCakes/services/autenticacao.dart';
+import 'package:ShoppingApp/pages/homePage.dart';
+import 'package:ShoppingApp/services/autenticacao.dart';
 import 'package:provider/provider.dart';
 
-import 'carrinho.dart';
+import 'CartPage.dart';
+
 
 class PerfilPage extends StatefulWidget {
   const PerfilPage({Key? key}) : super(key: key);
@@ -26,7 +27,7 @@ class _PerfilPageState extends State<PerfilPage> {
                     label: Text('Home'),
                     onPressed: () {
                       Navigator.of(context).push(
-                        MaterialPageRoute(builder: (_) => ProdutosPage()),
+                        MaterialPageRoute(builder: (_) => HomePage()),
                       );
                     },
                     icon: Icon(Icons.home_max_outlined),
@@ -37,7 +38,7 @@ class _PerfilPageState extends State<PerfilPage> {
                 label: Text('Carrinho'),
                 onPressed: () {
                   Navigator.of(context).push(
-                    MaterialPageRoute(builder: (_) => CarrinhoPage()),
+                    MaterialPageRoute(builder: (_) => CartPage()),
                   );
                 },
                 icon: Icon(Icons.shopping_cart_outlined),

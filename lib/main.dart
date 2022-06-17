@@ -1,11 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:mandaCakes/meuApp.dart';
+import 'package:ShoppingApp/meuApp.dart';
 import 'package:firebase_core/firebase_core.dart';
 //import 'package:mandaCakes/repositories/carrinho_repositorie.dart';
 import 'package:provider/provider.dart';
 import 'meuApp.dart';
-import 'package:mandaCakes/services/autenticacao.dart';
+import 'package:ShoppingApp/services/autenticacao.dart';
 import 'firebase_options.dart';
 
 void main() async {

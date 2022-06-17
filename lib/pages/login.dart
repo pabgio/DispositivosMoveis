@@ -1,9 +1,9 @@
 // ignore_for_file: deprecated_member_use
 
 import 'package:flutter/material.dart';
-import 'package:mandaCakes/pages/cadastro.dart';
+import 'package:ShoppingApp/pages/cadastro.dart';
 import 'package:provider/provider.dart';
-import 'package:mandaCakes/services/autenticacao.dart';
+import 'package:ShoppingApp/services/autenticacao.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);

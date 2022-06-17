@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:mandaCakes/pages/produtos_page.dart';
-import 'package:mandaCakes/pages/login.dart';
-import 'package:mandaCakes/services/autenticacao.dart';
+import 'package:ShoppingApp/pages/HomePage.dart';
+import 'package:ShoppingApp/pages/login.dart';
+import 'package:ShoppingApp/services/autenticacao.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -26,7 +26,7 @@ class _AuthCheckState extends State<AuthCheck> {
     } else
        FirebaseAuth.instance.userChanges();
 
-      return ProdutosPage();
+      return HomePage();
   }
 
   loading() {

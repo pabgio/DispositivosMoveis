@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mandaCakes/widgets/auth_check.dart';
+import 'package:ShoppingApp/widgets/auth_check.dart';
 class meuApp extends StatelessWidget {
   const meuApp({Key? key}) : super(key: key);
 

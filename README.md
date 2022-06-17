@@ -1,25 +1,36 @@
-### Projeto P2
-    Alunos:
-    Gabriel Adriovane Scheidt RA:1753134
-    Lucas Vassão Palazzo RA:1590995
-    Pablo Giovani dos Santos RA:2000113
+# Flutter - Shopping-App
+###### Design courtesy : https://dribbble.com/shots/3071109-Converse-Product-page-with-Add-to-cart-concept
 
-    O projeto é um aplicativo de venda de bolos o qual o cliente pode efetuar a compra se identificando através 
-    de cadastro e posteriormente através de login. 
-    Das funcionalidades implementadas nesta fase do projeto apenas o Carrinho de Compras não foi concluído.
 
-    Atividades Desenvolvidas
-    Gabriel: Repositório de produtos, documentação e envio do projeto.
-    Pablo: Interfaces, auteenticação, cadastro, login.
-    Lucas: Testes e verificações.
+### Features
+    - Add to favourite
+    - Add to cart
+    - Remove from cart
+    - WANT TO SEE NEW FEATURES ? CREATE AN ISSUE WITH LABEL "FEATURE" TAG ON IT AND WE'LL WORK ON IT IN OUR NEXT CODING SPRINT ON THIS PROJECT !!
+### Plugin
+1. Get               : https://pub.dartlang.org/packages/get
+3. Sqflite           : https://pub.dartlang.org/packages/sqflite
+5. Shared preference : https://pub.dev/packages/shared_preferences
 
-### Getting Started
+### Widgets
+1. ListView
+2. GridView
+3. BoxDecoration - For box-shadow & rounded Image
 
-    Para Startar o projeto:
-      -> Deve ser feito o download da pasta no Github através do download do link: https://github.com/pabgio/DispositivosMoveis.
-      -> Extrair o arquivo zip.
-      -> Abrir a pasta através do VSCode.
-      -> Executar o Arquivo Main;
 
-    OBS: O usuário deve ter o ambiente Flutter configurado corretamente.
+### Screen-shot
 
+![Alt text](./images/HomeScreen.png?raw=true "Home Screen")
+![Alt text](./images/ProductDetails1.png?raw=true "Product Details")
+![Alt text](./images/ProductDetails2.png?raw=true "Product Details")
+![Alt text](./images/CartList.png?raw=true "Product Details")
+
+
+You can download apk file from [here](./app-release.apk)
+
+Video Demo : https://youtu.be/15-S9ob0OgQ
+
+created by : hello@hupp.in
+
+
+https://blog.hupp.tech/flutter-e-commerce-app/

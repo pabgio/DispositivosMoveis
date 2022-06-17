@@ -3,9 +3,9 @@
 import 'dart:ffi';
 
 import 'package:flutter/material.dart';
-import 'package:mandaCakes/pages/login.dart';
-import 'package:mandaCakes/pages/produtos_page.dart';
-import 'package:mandaCakes/services/autenticacao.dart';
+import 'package:ShoppingApp/pages/login.dart';
+import 'package:ShoppingApp/pages/homePage.dart';
+import 'package:ShoppingApp/services/autenticacao.dart';
 import 'package:provider/provider.dart';
 
 class CadastroPage extends StatefulWidget {
