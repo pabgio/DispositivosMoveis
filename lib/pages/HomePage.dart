@@ -1,6 +1,6 @@
 import 'package:manda_cakes/controller/homePageController.dart';
 import 'package:manda_cakes/models/ItemModel.dart';
-import 'package:manda_cakes/pages/CartPage.dart';
+import 'package:manda_cakes/pages/carrinhoPage.dart';
 import 'package:manda_cakes/pages/ItemDetail.dart';
 import 'package:manda_cakes/pages/perfil_page.dart';
 import 'package:manda_cakes/services/itemService.dart';
@@ -36,7 +36,7 @@ class _HomePageState extends State<HomePage> {
               child: InkResponse(
                   onTap: () {
                     Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => CartPage()));
+                        MaterialPageRoute(builder: (context) => CarrinhoPage()));
                   },
                   child: Stack(
                     children: [
@@ -72,7 +72,7 @@ class _HomePageState extends State<HomePage> {
                 label: Text('Carrinho'),
                 onPressed: () {
                   Navigator.of(context).push(
-                    MaterialPageRoute(builder: (_) => CartPage()),
+                    MaterialPageRoute(builder: (_) => CarrinhoPage()),
                   );
                 },
                 icon: Icon(Icons.shopping_cart_outlined),
@@ -197,7 +197,7 @@ class ItemView extends StatelessWidget {
                     Padding(
                       padding: EdgeInsets.only(left: 10.0),
                       child: Text(
-                        "${item.name}",
+                        "${item.nome}",
                         style: TextStyle(
                           fontWeight: FontWeight.w600,
                           fontSize: 15.0,
@@ -214,7 +214,7 @@ class ItemView extends StatelessWidget {
                           Padding(
                             padding: EdgeInsets.only(right: 10.0),
                             child: Text(
-                              "\$${item.price.toString()}",
+                              "\$${item.preco.toString()}",
                               style: TextStyle(fontWeight: FontWeight.w500),
                             ),
                           )

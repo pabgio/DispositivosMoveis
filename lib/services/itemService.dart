@@ -1,11 +1,15 @@
 import 'package:manda_cakes/models/ItemModel.dart';
-import 'package:manda_cakes/services/sqlService.dart';
+import 'package:manda_cakes/bd/bd.dart';
 import 'package:manda_cakes/services/storageService.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:manda_cakes/services/autenticacao.dart';
+
 
 class ItemServices {
-  SQLService sqlService = SQLService();
+  BD sqlService = BD();
   StorageService storageService = StorageService();
   List<ShopItemModel> shoppingList = [];
+  final user = FirebaseAuth.instance.currentUser;
 
   List<ShopItemModel> getShoppingItems() {
     int count = 1;
@@ -42,6 +46,7 @@ class ItemServices {
   }
 
   Future saveToLocalDB() async {
+    
     List<ShopItemModel> items = this.items;
     for (var i = 0; i < items.length; i++) {
       await sqlService.saveRecord(items[i]);

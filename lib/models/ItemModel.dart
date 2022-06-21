@@ -2,32 +2,32 @@ import 'package:flutter/cupertino.dart';
 
 var data = [
   {
-    "name": "Bolo de Morango",
-    "price": 5.0,
+    "nome": "Bolo de Morango",
+    "preco": 5.0,
     "fav": false,
     "rating": 4.5,
     "image":
         "https://receitatodahora.com.br/wp-content/uploads/2017/06/bolo-de-pote-de-leite-ninho-com-morango.jpg"
   },
   {
-    "name": "Bolo de Chocolate",
-    "price": 5.0,
+    "nome": "Bolo de Chocolate",
+    "preco": 5.0,
     "fav": false,
     "rating": 4.5,
     "image":
         "https://amoradoceria.com.br/wp-content/uploads/2022/03/receita-de-bolo-no-pote-de-chocolate.jpg"
   },
   {
-    "name": "Bolo de Limao",
-    "price": 5.0,
+    "nome": "Bolo de Limao",
+    "preco": 5.0,
     "fav": false,
     "rating": 4.5,
     "image":
         "https://bolosparavender.com.br/wp-content/uploads/2018/12/bolo-de-pote-de-lim%C3%A3o-1200x900.jpg"
   },
   {
-    "name": "Bolo de Maracuja",
-    "price": 5.0,
+    "nome": "Bolo de Maracuja",
+    "preco": 5.0,
     "fav": false,
     "rating": 3.5,
     "image":
@@ -37,8 +37,8 @@ var data = [
 ];
 
 class ShopItemModel {
-  String name;
-  double price;
+  String nome;
+  double preco;
   bool fav;
   double rating;
   String image;
@@ -50,18 +50,18 @@ class ShopItemModel {
       required this.id,
       required this.fav,
       required this.rating,
-      required this.price,
+      required this.preco,
       required this.image,
-      required this.name});
+      required this.nome});
 
   factory ShopItemModel.fromJson(Map<String, dynamic> json) {
     return ShopItemModel(
       id: json['id'],
       fav: json['fav'] == 1,
       rating: json['rating'],
-      price: json['price'],
+      preco: json['preco'],
       image: json['image'],
-      name: json['name'],
+      nome: json['nome'],
       shopId: json['shop_id'] ?? 0,
     );
   }

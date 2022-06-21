@@ -140,9 +140,9 @@ class _ItemDetailPageState extends State<ItemDetailPage> {
                                 controller.setToFav(model.id, !model.fav);
                                 var msg = "";
                                 if (model.fav) {
-                                  msg = "${model.name} Marcado como favorito";
+                                  msg = "${model.nome} Marcado como favorito";
                                 } else {
-                                  msg = "${model.name} removido dos favoritos";
+                                  msg = "${model.nome} removido dos favoritos";
                                 }
                                 ScaffoldMessenger.of(context)
                                     .showSnackBar(SnackBar(content: Text(msg)));
@@ -174,7 +174,7 @@ class _ItemDetailPageState extends State<ItemDetailPage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Text(
-                    model.name,
+                    model.nome,
                     style:
                         TextStyle(fontWeight: FontWeight.w500, fontSize: 19.0),
                   ),
@@ -209,7 +209,7 @@ class _ItemDetailPageState extends State<ItemDetailPage> {
                         style: TextStyle(fontSize: 12.0, color: Colors.grey),
                       ),
                     ),
-                    Text("R\$${model.price.toString()}",
+                    Text("R\$${model.preco.toString()}",
                         style: TextStyle(
                             fontSize: 25.0, fontWeight: FontWeight.w600)),
                   ],

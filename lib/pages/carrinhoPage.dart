@@ -3,7 +3,7 @@ import 'package:manda_cakes/models/ItemModel.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class CartPage extends StatelessWidget {
+class CarrinhoPage extends StatelessWidget {
   Widget generateCart(BuildContext context, ShopItemModel d) {
     return Padding(
       padding: EdgeInsets.all(5.0),
@@ -41,7 +41,7 @@ class CartPage extends StatelessWidget {
                     children: <Widget>[
                       Expanded(
                         child: Text(
-                          d.name,
+                          d.nome,
                           style: TextStyle(
                               fontWeight: FontWeight.w600, fontSize: 15.0),
                         ),
@@ -52,9 +52,8 @@ class CartPage extends StatelessWidget {
                           onTap: () {
                             Get.find<HomePageController>()
                                 .removeFromCart(d.shopId ?? 0);
-                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                                content: Text(
-                                    "Item removido")));
+                            ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(content: Text("Item removido")));
                           },
                           child: Padding(
                             padding: EdgeInsets.only(right: 10.0),
@@ -70,7 +69,7 @@ class CartPage extends StatelessWidget {
                   SizedBox(
                     height: 5.0,
                   ),
-                  Text("Preco ${d.price.toString()}"),
+                  Text("Preco ${d.preco.toString()}"),
                 ],
               ),
             ))
@@ -80,10 +79,11 @@ class CartPage extends StatelessWidget {
     );
   }
 
-
   getItemTotal(List<ShopItemModel> items) {
     double sum = 0.0;
-    items.forEach((e){sum += e.price;});
+    items.forEach((e) {
+      sum += e.preco;
+    });
     return "R\$$sum";
   }
 
@@ -104,7 +104,8 @@ class CartPage extends StatelessWidget {
                 builder: (_) {
                   if (controller.cartItems.length == 0) {
                     return Center(
-                      child: Text("Nenhum item no carrinho"),
+                      child: Text("Carrinho Vazio",
+                          style: TextStyle(fontSize: 20.0)),
                     );
                   }
                   return ListView(
@@ -126,24 +127,21 @@ class CartPage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Container(
-                child: GetBuilder<HomePageController>(
-                  builder: (_) {
-                    return RichText(
-                      text: TextSpan(
-                          text: "Total  ",
-                          style: TextStyle(color: Colors.black, fontSize: 18),
-                          children: <TextSpan>[
-                            TextSpan(
-                                text: getItemTotal(controller.cartItems).toString(),
-                                style: TextStyle(fontWeight: FontWeight.bold)
-                            )
-                          ]
-                      ),
-                    );
-                  },
-                )
-              ),
+              Container(child: GetBuilder<HomePageController>(
+                builder: (_) {
+                  return RichText(
+                    text: TextSpan(
+                        text: "Total  ",
+                        style: TextStyle(color: Colors.black, fontSize: 18),
+                        children: <TextSpan>[
+                          TextSpan(
+                              text:
+                                  getItemTotal(controller.cartItems).toString(),
+                              style: TextStyle(fontWeight: FontWeight.bold))
+                        ]),
+                  );
+                },
+              )),
               Container(
                 alignment: Alignment.centerLeft,
                 height: 50,
@@ -154,8 +152,19 @@ class CartPage extends StatelessWidget {
                     alignment: Alignment.center,
                     height: 40,
                     width: 100,
-                    child: Text("Comprar", style: TextStyle(fontSize: 18),),
-                  )
+                    child: Text(
+                      "Comprar",
+                      style: TextStyle(fontSize: 18),
+                    ),
+                  ),
+                  style: ButtonStyle(
+                    backgroundColor:
+                        MaterialStateProperty.all<Color>(Colors.green),
+                    shape: MaterialStateProperty.all(
+                      RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20)),
+                    ),
+                  ),
                 ),
               )
             ],
