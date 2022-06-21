@@ -10,32 +10,39 @@ import 'package:provider/provider.dart';
 import '../services/goggle_login.dart';
 import 'carrinhoPage.dart';
 
-class PerfilPage extends StatefulWidget{
+class PerfilPage extends StatefulWidget {
   const PerfilPage({Key? key}) : super(key: key);
   State<PerfilPage> createState() => _PerfilPageState();
 }
 
 class _PerfilPageState extends State<PerfilPage> {
-  File? imageFile;
-
+  XFile? imageFile;
   
+  
+   _abrirGaleria() async {
+    final picker = ImagePicker();
 
-  _abrirCamera() async{
-      final user = FirebaseAuth.instance.currentUser;
-
-     final picker = ImagePicker();
-    final pickedFile = await picker.pickImage(source: ImageSource.camera);
-    this.setState(() {
-      user!.photoURL != null ? File(pickedFile!.path) : null;
-      
-    });
+    try {
+      XFile? file = await picker.pickImage(source: ImageSource.gallery);
+      if (file != null) setState(() => imageFile = file);
+    } catch (e) {
+      print(e);
+    }
   }
 
+  _abrirCamera() async {
+    final picker = ImagePicker();
 
+    try {
+      XFile? file = await picker.pickImage(source: ImageSource.camera);
+      if (file != null) setState(() => imageFile = file);
+    } catch (e) {
+      print(e);
+    }
+  }
 
-
- _escolha(BuildContext context) {
-  final user = Provider.of<GoogleLogin>(context , listen: false);
+  _escolha(BuildContext context) {
+    final user = Provider.of<GoogleLogin>(context, listen: false);
     return showDialog(
         context: context,
         builder: (BuildContext context) {
@@ -46,12 +53,9 @@ class _PerfilPageState extends State<PerfilPage> {
                 children: <Widget>[
                   GestureDetector(
                     child: Text("Galeria"),
-                    
                     onTap: () {
-                      user.abrirGaleria();
-                      
+                      _abrirGaleria();
                     },
-                    
                   ),
                   Padding(padding: EdgeInsets.all(8)),
                   GestureDetector(
@@ -133,7 +137,10 @@ class _PerfilPageState extends State<PerfilPage> {
                       fit: StackFit.expand,
                       children: [
                         CircleAvatar(
-                          backgroundImage: NetworkImage(user!.photoURL!),
+                          child: ClipOval(
+                              child: imageFile != null
+                                  ? Image.file(File(imageFile!.path))
+                                  : null),
                         ),
                         Positioned(
                           right: -9,
@@ -145,14 +152,14 @@ class _PerfilPageState extends State<PerfilPage> {
                               padding: EdgeInsets.zero,
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(50),
-                                  side: BorderSide(color: Colors.white)),
+                                  side: BorderSide(color: Colors.grey)),
                               color: Color(0xFFF5F6F3),
                               onPressed: () {
                                 _escolha(context);
                               },
                               child: Icon(
                                 Icons.camera_alt_sharp,
-                                color: Colors.white,
+                                color: Colors.black,
                               ),
                             ),
                           ),
@@ -163,14 +170,14 @@ class _PerfilPageState extends State<PerfilPage> {
                   height: 20,
                 ),
                 Text(
-                  user.displayName!,
+                  user!.displayName!,
                   style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
                       color: Colors.blue),
                 ),
                 Text(
-                  user.email!,
+                  user.email.toString(),
                   style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,

@@ -33,19 +33,5 @@ class GoogleLogin extends ChangeNotifier{
   }
 
 
-  Future abrirGaleria() async {
 
-    final picker = ImagePicker();
-    XFile? pickedFile = await picker.pickImage(source: ImageSource.gallery);   
-      
-    if(pickedFile != null){
-     setState() {
-           user.photoUrl != null ? (pickedFile.path) : null;
-
-           notifyListeners();
-
-        }
-
-  }
-  }
 }
