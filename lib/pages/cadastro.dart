@@ -29,12 +29,7 @@ class _CadastroPage extends State<CadastroPage> {
     if (_formKeyCadastro.currentState!.validate()) {
       cadastrar();
       _formKeyCadastro.currentState!.reset();
-      
-      
-
     }
-
-
   }
 
   cadastrar() async {
@@ -45,7 +40,6 @@ class _CadastroPage extends State<CadastroPage> {
       setState(() => loading = true);
       ScaffoldMessenger.of(context)
           .showSnackBar(SnackBar(content: Text(e.message)));
-
     }
   }
 
@@ -58,7 +52,10 @@ class _CadastroPage extends State<CadastroPage> {
             padding: const EdgeInsets.only(top: 40),
             child: Text(
               'Cadastro',
-              style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold, color: Colors.blue),
+              style: TextStyle(
+                  fontSize: 30,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.blue),
             ),
           ),
           Form(
@@ -221,8 +218,6 @@ class _CadastroPage extends State<CadastroPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      
-      
       body: _body(),
     );
   }

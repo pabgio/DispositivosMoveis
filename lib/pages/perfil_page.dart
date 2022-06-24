@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:manda_cakes/pages/homePage.dart';
@@ -17,9 +18,8 @@ class PerfilPage extends StatefulWidget {
 
 class _PerfilPageState extends State<PerfilPage> {
   XFile? imageFile;
-  
-  
-   _abrirGaleria() async {
+
+  _abrirGaleria() async {
     final picker = ImagePicker();
 
     try {
@@ -31,6 +31,7 @@ class _PerfilPageState extends State<PerfilPage> {
   }
 
   _abrirCamera() async {
+    
     final picker = ImagePicker();
 
     try {
@@ -141,6 +142,7 @@ class _PerfilPageState extends State<PerfilPage> {
                               child: imageFile != null
                                   ? Image.file(File(imageFile!.path))
                                   : null),
+                          radius: 10,
                         ),
                         Positioned(
                           right: -9,
